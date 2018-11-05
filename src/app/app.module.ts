@@ -27,10 +27,11 @@ import {PlaceListComponent} from './components/place/place-list/place-list.compo
 import {InformationWinnersComponent} from './components/information/information-winners/information-winners.component';
 import {InformationScheduleComponent} from './components/information/information-schedule/information-schedule.component';
 import {LoginComponent} from './components/login/login/login.component';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './helpers/token.interceptor';
 import {MessageComponent} from './components/message/message.component';
 import {AppRouter} from './app.routing';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,9 @@ import {AppRouter} from './app.routing';
   ],
   imports: [
     BrowserModule,
-    AppRouter
+    AppRouter,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}

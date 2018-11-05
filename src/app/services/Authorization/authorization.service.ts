@@ -13,13 +13,17 @@ export class AuthorizationService {
   }
 
   login(email: string, password: string) {
-    return this.httpClient.post<any>(`${environment.apiUrl}/user/login`, {'Email': email, 'Password': password})
+    return this.httpClient.post<any>(`${environment.apiUrl}user/login`, {'Email': email, 'Password': password})
       .pipe(map(user => {
         if (user && user.token) {
           localStorage.setItem('currentUser', JSON.stringify(user));
         }
         return user;
       }));
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
   }
 
   hasPermission(permissionLevel: PermissionLevel): boolean {
