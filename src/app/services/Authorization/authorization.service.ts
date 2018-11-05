@@ -1,15 +1,28 @@
 import {Injectable} from '@angular/core';
 import {PermissionLevel} from '../../helpers/PermissionLevel.types';
+import {environment} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizationService {
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
-  static hasPermission(permissionLevel: PermissionLevel) {
+  login(email: string, password: string) {
+    return this.httpClient.post<any>(`${environment.apiUrl}/user/login`, {'Email': email, 'Password': password})
+      .pipe(map(user => {
+        if (user && user.token) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+        return user;
+      }));
+  }
+
+  hasPermission(permissionLevel: PermissionLevel): boolean {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.permissionLevel) {
       return parseInt(currentUser.permissionLevel, 10) <= parseInt(permissionLevel, 10);
