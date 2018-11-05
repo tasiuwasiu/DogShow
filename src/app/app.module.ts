@@ -27,6 +27,9 @@ import { PlaceEditComponent } from './components/place/place-edit/place-edit.com
 import { PlaceListComponent } from './components/place/place-list/place-list.component';
 import { InformationWinnersComponent } from './components/information/information-winners/information-winners.component';
 import { InformationScheduleComponent } from './components/information/information-schedule/information-schedule.component';
+import { LoginComponent } from './components/login/login/login.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptor} from './helpers/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -54,13 +57,16 @@ import { InformationScheduleComponent } from './components/information/informati
     PlaceEditComponent,
     PlaceListComponent,
     InformationWinnersComponent,
-    InformationScheduleComponent
+    InformationScheduleComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
