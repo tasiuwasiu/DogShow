@@ -4,6 +4,7 @@ import {UserService} from '../../../services/User/user.service';
 import {User} from '../../../models/User.model';
 import {first} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {MessageService} from '../../../services/Message/message.service';
 
 @Component({
   selector: 'app-profile-create',
@@ -18,7 +19,8 @@ export class ProfileCreateComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -54,9 +56,19 @@ export class ProfileCreateComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login']).then(() => {
+            this.messageService.removeMessages();
+            this.messageService.addSuccess('Zarejestrowano użytkownika!');
+          });
         },
         error => {
+          if (error.error.message) {
+            this.messageService.addError(error.error.message);
+          } else if (error.status !== null && error.status === 0) {
+            this.messageService.addError('Brak połączenia z serwerem API!');
+          } else {
+            this.messageService.addError('Błąd rejestracji');
+          }
           this.isProcessing = false;
         }
       );

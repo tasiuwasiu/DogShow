@@ -1,3 +1,26 @@
-<p>
-  message works!
-</p>
+<div *ngIf="messageService.hasMessages">
+  <div *ngIf="messageService.errorMessages">
+    <div *ngFor='let error of messageService.errorMessages; let i = index' class="alert alert-danger">
+      {{error}}
+      <button type="button" class="close" aria-label="Close" (click)="messageService.removeError(i)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="messageService.warningMessages">
+    <div *ngFor='let warning of messageService.warningMessages; let i = index' class="alert alert-warning">
+      {{warning}}
+      <button type="button" class="close" aria-label="Close" (click)="messageService.removeWarning(i)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="messageService.successMessages">
+    <div *ngFor='let success of messageService.successMessages; let i = index' class="alert alert-success">
+      {{success}}
+      <button type="button" class="close" aria-label="Close" (click)="messageService.removeSuccess(i)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+</div>

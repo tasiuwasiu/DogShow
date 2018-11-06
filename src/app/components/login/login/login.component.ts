@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthorizationService} from '../../../services/Authorization/authorization.service';
 import {first} from 'rxjs/operators';
+import {MessageService} from '../../../services/Message/message.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,9 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private authorizationService: AuthorizationService) { }
+              private authorizationService: AuthorizationService,
+              private messageService: MessageService) {
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -33,12 +36,14 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  get f() { return this.loginForm.controls; }
+  get f() {
+    return this.loginForm.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
 
-    if(this.loginForm.invalid) {
+    if (this.loginForm.invalid) {
       return;
     }
 
@@ -47,10 +52,19 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate([this.returnUrl]).then(() => {
+              this.messageService.removeMessages();
+              this.messageService.addSuccess('Zalogowano!');
+            });
         },
         error => {
-          this.error = error;
+          if (error.error.message) {
+            this.messageService.addError(error.error.message);
+          } else if (error.status !== null && error.status === 0) {
+            this.messageService.addError('Brak połączenia z serwerem API!');
+          } else {
+            this.messageService.addError('Błąd logowania');
+          }
           this.loading = false;
         }
       );
