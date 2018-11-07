@@ -1,8 +1,9 @@
 <div>
   <nav>
-    <a href="login">Logowanie</a>
+    <a *ngIf="!isLogged()" href="login">Logowanie</a>
     <a *ngIf="isAdmin() || isOrganizator()" href="setup/init">Ustawienia początkowe</a>
     <a *ngIf="!isLogged()" href="register">Rejestracja</a>
+    <a *ngIf="isLogged()" href="profile/edit">Edycja</a>
   </nav>
 </div>
 <app-message></app-message>

@@ -12,7 +12,11 @@ export class UserService {
   }
 
   register(newUser: User) {
-    return this.httpClient.post<any>(`${environment.apiUrl}user/register`, newUser)
-      ;
+    return this.httpClient.post<any>(`${environment.apiUrl}user/register`, newUser);
   }
+
+  editUser(userID: number, newData: User) {
+    return this.httpClient.post<any>(`${environment.apiUrl}user/edit/${userID}`, newData);
+  }
+
 }
