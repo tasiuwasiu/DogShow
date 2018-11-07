@@ -14,7 +14,7 @@ export class MessageService {
   }
 
   hasAnyMessages() {
-    this.hasMessages = this.errorMessages.length !== 0
+    return this.hasMessages = this.errorMessages.length !== 0
       || this.successMessages.length !== 0
       || this.warningMessages.length !== 0;
   }
