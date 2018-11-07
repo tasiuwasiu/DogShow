@@ -6,6 +6,7 @@ import {AuthGuardService} from './services/AuthGuard/auth-guard.service';
 import {ProfileCreateComponent} from './components/profile/profile-create/profile-create.component';
 import {ProfileDetailsComponent} from './components/profile/profile-details/profile-details.component';
 import {ProfileEditComponent} from './components/profile/profile-edit/profile-edit.component';
+import {DogCreateComponent} from './components/dog/dog-create/dog-create.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'register', component: ProfileCreateComponent},
   {path: 'profile', component: ProfileDetailsComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'profile/edit', component: ProfileEditComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
+  {path: 'dog/add', component: DogCreateComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
 
 
   {path: '**', redirectTo: ''}

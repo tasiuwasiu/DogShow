@@ -1,17 +1,17 @@
 export interface Dog {
-  DogID: number;
-  OwnerID: number;
-  BreedID: number;
-  ClassID: number;
-  Name: string;
-  LineageNumber: string;
-  RegistrationNumber: string;
-  Titles: string;
-  ChipNumber: string;
-  Sex: string;
-  Birthday: string;
-  FatherName: string;
-  MotherName: string;
-  BreederName: string;
-  BreederAddress: string;
+  dogID: number;
+  ownerID: number;
+  breedID: number;
+  classID: number;
+  name: string;
+  lineageNumber: string;
+  registrationNumber: string;
+  titles: string;
+  chipNumber: string;
+  sex: string;
+  birthday: string;
+  fatherName: string;
+  motherName: string;
+  breederName: string;
+  breederAddress: string;
 }
