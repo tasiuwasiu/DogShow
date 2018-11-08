@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {User} from '../../models/User.model';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,11 @@ export class AuthorizationService {
 
   hasPermission(permissionLevel: PermissionLevel): boolean {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.permissionLevel) {
-      return parseInt(currentUser.permissionLevel, 10) <= parseInt(permissionLevel, 10);
+    if (currentUser && currentUser.token && currentUser.permissionLevel) {
+      if (!this.hasTokenExpired(currentUser.token)) {
+        return parseInt(currentUser.permissionLevel, 10) <= parseInt(permissionLevel, 10);
+      }
+      return false;
     } else {
       return false;
     }
@@ -48,5 +52,10 @@ export class AuthorizationService {
   getCurrentUser() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return <User>currentUser;
+  }
+
+  hasTokenExpired(token: string) {
+    const helper = new JwtHelperService();
+    return helper.isTokenExpired(token);
   }
 }

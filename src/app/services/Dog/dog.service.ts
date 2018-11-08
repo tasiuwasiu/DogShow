@@ -18,6 +18,10 @@ export class DogService {
     return this.httpClient.get<Dog>(`${environment.apiUrl}dog/get/${id}`);
   }
 
+  getDogsByUserID(userId: number) {
+
+  }
+
 
   getBreedsInSection(sectionID: number) {
     return this.httpClient.get<DogBreed[]>(`${environment.apiUrl}dog/getBreedsInSection/${sectionID}`);

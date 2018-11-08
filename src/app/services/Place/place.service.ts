@@ -12,18 +12,18 @@ export class PlaceService {
   }
 
   addPlace(newPlace: Place) {
-    return this.httpClient.post(`${environment.apiUrl}place/create`, newPlace);
+    return this.httpClient.post<Place>(`${environment.apiUrl}place/create`, newPlace);
   }
 
-  editPlace(placeId: number, placeName: string) {
-
+  editPlace(placeId: number, place: Place) {
+    return this.httpClient.put<Place>(`${environment.apiUrl}place/${placeId}`, place);
   }
 
-  getPlaceName(placeId: number) {
-
+  getPlace(placeId: number) {
+    return this.httpClient.get<Place>(`${environment.apiUrl}place/${placeId}`);
   }
 
   getAllPlaces() {
-
+    return this.httpClient.get<Place[]>(`${environment.apiUrl}place`);
   }
 }

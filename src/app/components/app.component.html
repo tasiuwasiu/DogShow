@@ -1,10 +1,11 @@
-<div>
-  {{getTitle()}}
-  <nav>
+<div class="bg-dark">
+  <h1>{{getTitle()}}</h1>
+  <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
     <a *ngIf="!isLogged()" href="login">Logowanie</a>
     <a *ngIf="isLogged()" href="login">Wyloguj</a>
     <a *ngIf="isAdmin() || isOrganizator()" href="setup/init">Ustawienia początkowe</a>
     <a *ngIf="isAdmin() || isOrganizator()" href="place/create">dodaj miejsce</a>
+    <a *ngIf="isAdmin() || isOrganizator()" href="place">lista miejsc</a>
     <a *ngIf="!isLogged()" href="register">Rejestracja</a>
     <a *ngIf="isLogged()" href="profile/edit">Edycja</a>
     <a *ngIf="isLogged()" href="dog/add">dodaj psa</a>

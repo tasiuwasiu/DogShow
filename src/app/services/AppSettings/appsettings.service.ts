@@ -17,7 +17,7 @@ export class AppSettingsService {
   }
 
   initAllSettings() {
-    this.appTitle = 'x';
+    this.appTitle = 'Mój tytuł';
   }
 
   setAppState(stateCode: number) {

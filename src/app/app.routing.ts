@@ -9,6 +9,8 @@ import {ProfileEditComponent} from './components/profile/profile-edit/profile-ed
 import {DogCreateComponent} from './components/dog/dog-create/dog-create.component';
 import {DogListComponent} from './components/dog/dog-list/dog-list.component';
 import {PlaceCreateComponent} from './components/place/place-create/place-create.component';
+import {PlaceListComponent} from './components/place/place-list/place-list.component';
+import {PlaceEditComponent} from './components/place/place-edit/place-edit.component';
 
 
 const routes: Routes = [
@@ -21,6 +23,8 @@ const routes: Routes = [
   {path: 'dog/add', component: DogCreateComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'dog/list', component: DogListComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'place/create', component: PlaceCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'place', component: PlaceListComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'place/:id', component: PlaceEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   {path: '**', redirectTo: ''}
 ];
 
