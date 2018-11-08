@@ -11,20 +11,32 @@ import {DogListComponent} from './components/dog/dog-list/dog-list.component';
 import {PlaceCreateComponent} from './components/place/place-create/place-create.component';
 import {PlaceListComponent} from './components/place/place-list/place-list.component';
 import {PlaceEditComponent} from './components/place/place-edit/place-edit.component';
+import {InformationWinnersComponent} from './components/information/information-winners/information-winners.component';
 
 
 const routes: Routes = [
   {path: '', component: InformationScheduleComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'setup/init', component: SetupInitComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
-  {path: 'register', component: ProfileCreateComponent},
+  // information
+  {path: 'schedule', component: InformationScheduleComponent},
+  {path: 'results', component: InformationWinnersComponent},
+  // profile
   {path: 'profile', component: ProfileDetailsComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'profile/edit', component: ProfileEditComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: ProfileCreateComponent},
+  // setup
+  {path: 'setup/init', component: SetupInitComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  // dog
   {path: 'dog/add', component: DogCreateComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'dog/list', component: DogListComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
-  {path: 'place/create', component: PlaceCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  // place
   {path: 'place', component: PlaceListComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   {path: 'place/:id', component: PlaceEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'place/create', component: PlaceCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  // contest
+
+
+  // default
   {path: '**', redirectTo: ''}
 ];
 

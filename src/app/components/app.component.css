@@ -1,15 +1,10 @@
-a {
-  margin:10px;
-  color: white;
-}
-
-div {
+.app-title {
   padding: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
-h1 {
+h2 {
   color: white;
   font-weight: bold;
-  margin: 10px;
+  margin: 5px;
 }

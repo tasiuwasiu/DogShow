@@ -1,15 +1,94 @@
-<div class="bg-dark">
-  <h1>{{getTitle()}}</h1>
+<div class="bg-dark app-title">
+  <h2>{{getTitle()}}</h2>
   <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-    <a *ngIf="!isLogged()" href="login">Logowanie</a>
-    <a *ngIf="isLogged()" href="login">Wyloguj</a>
-    <a *ngIf="isAdmin() || isOrganizator()" href="setup/init">Ustawienia początkowe</a>
-    <a *ngIf="isAdmin() || isOrganizator()" href="place/create">dodaj miejsce</a>
-    <a *ngIf="isAdmin() || isOrganizator()" href="place">lista miejsc</a>
-    <a *ngIf="!isLogged()" href="register">Rejestracja</a>
-    <a *ngIf="isLogged()" href="profile/edit">Edycja</a>
-    <a *ngIf="isLogged()" href="dog/add">dodaj psa</a>
-    <a *ngIf="isLogged()" href="profile/">profil</a></nav>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="infoDropdown" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Informacje
+          </a>
+          <div class="dropdown-menu" aria-labelledby="infoDropdown">
+            <a href="schedule" class="dropdown-item">Terminarz</a>
+            <a href="results" class="dropdown-item">Wyniki</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="contestDropdown" role="button"
+             data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Konkursy
+          </a>
+          <div class="dropdown-menu" aria-labelledby="contestDropdown">
+            <a *ngIf="!isLogged()" href="register" class="dropdown-item">Rejestracja</a>
+            <a *ngIf="!isLogged()" href="login" class="dropdown-item">Logowanie</a>
+            <a *ngIf="isLogged()" href="profile/" class="dropdown-item">Mój profil</a>
+            <a *ngIf="isLogged()" href="profile/edit" class="dropdown-item">Edycja profilu</a>
+            <div *ngIf="isLogged()" class="dropdown-divider"></div>
+            <a *ngIf="isLogged()" href="login">Wyloguj</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAdmin() || isOrganizator()">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="placeDropdown" role="button"
+             data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Miejsca
+          </a>
+          <div class="dropdown-menu" aria-labelledby="placeDropdown">
+            <a href="place/create" class="dropdown-item">Dodaj miejsce</a>
+            <a href="place" class="dropdown-item">Lista miejsc</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isLogged()">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="dogDropdown" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Psy
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dogDropdown">
+            <a href="dog/add" class="dropdown-item">Dodaj psa</a>
+            <a href="dog/list" class="dropdown-item">Lista moich psów</a>
+            <a *ngIf="!isLogged()" href="login" class="dropdown-item">Logowanie</a>
+            <a *ngIf="isLogged()" href="profile/" class="dropdown-item">Mój profil</a>
+            <a *ngIf="isLogged()" href="profile/edit" class="dropdown-item">Edycja profilu</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="setupDropdown" role="button"
+             data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Ustawienia
+          </a>
+          <div class="dropdown-menu" aria-labelledby="setupDropdown">
+            <a *ngIf="isAdmin() || isOrganizator()" href="setup/init" class="dropdown-item">Ustawienia początkowe</a>
+            <a *ngIf="!isLogged()" href="login" class="dropdown-item">Logowanie</a>
+            <a *ngIf="isLogged()" href="profile/" class="dropdown-item">Mój profil</a>
+            <a *ngIf="isLogged()" href="profile/edit" class="dropdown-item">Edycja profilu</a>
+            <div *ngIf="isLogged()" class="dropdown-divider"></div>
+            <a *ngIf="isLogged()" href="login">Wyloguj</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button"
+             data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Profil
+          </a>
+          <div class="dropdown-menu" aria-labelledby="profileDropdown">
+            <a *ngIf="!isLogged()" href="register" class="dropdown-item">Rejestracja</a>
+            <a *ngIf="!isLogged()" href="login" class="dropdown-item">Logowanie</a>
+            <a *ngIf="isLogged()" href="profile/" class="dropdown-item">Mój profil</a>
+            <a *ngIf="isLogged()" href="profile/edit" class="dropdown-item">Edycja profilu</a>
+            <div *ngIf="isLogged()" class="dropdown-divider"></div>
+            <a *ngIf="isLogged()" href="login">Wyloguj</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </div>
 <app-message></app-message>
 <router-outlet></router-outlet>

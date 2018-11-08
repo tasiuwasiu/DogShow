@@ -33,6 +33,7 @@ import {MessageComponent} from './components/message/message.component';
 import {AppRouter} from './app.routing';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppLoadModule} from './appLoad.module';
+import {ContestTypeEditComponent} from './components/contest-type/contest-type-edit/contest-type-edit.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {AppLoadModule} from './appLoad.module';
     InformationWinnersComponent,
     InformationScheduleComponent,
     LoginComponent,
-    MessageComponent
+    MessageComponent,
+    ContestTypeEditComponent
   ],
   imports: [
     BrowserModule,
