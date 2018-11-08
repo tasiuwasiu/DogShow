@@ -7,6 +7,8 @@ import {ProfileCreateComponent} from './components/profile/profile-create/profil
 import {ProfileDetailsComponent} from './components/profile/profile-details/profile-details.component';
 import {ProfileEditComponent} from './components/profile/profile-edit/profile-edit.component';
 import {DogCreateComponent} from './components/dog/dog-create/dog-create.component';
+import {DogListComponent} from './components/dog/dog-list/dog-list.component';
+import {PlaceCreateComponent} from './components/place/place-create/place-create.component';
 
 
 const routes: Routes = [
@@ -17,8 +19,8 @@ const routes: Routes = [
   {path: 'profile', component: ProfileDetailsComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'profile/edit', component: ProfileEditComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'dog/add', component: DogCreateComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
-
-
+  {path: 'dog/list', component: DogListComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
+  {path: 'place/create', component: PlaceCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   {path: '**', redirectTo: ''}
 ];
 

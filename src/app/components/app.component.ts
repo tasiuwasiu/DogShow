@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthorizationService} from '../services/Authorization/authorization.service';
+import {AppSettingsService} from '../services/AppSettings/appsettings.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,13 @@ import {AuthorizationService} from '../services/Authorization/authorization.serv
 export class AppComponent {
   title = 'DogShow';
 
-  constructor(private authorizationService: AuthorizationService) {
+
+  constructor(private authorizationService: AuthorizationService,
+              private appSettingsService: AppSettingsService) {
+  }
+
+  getTitle() {
+    return this.appSettingsService.appTitle;
   }
 
   isLogged() {

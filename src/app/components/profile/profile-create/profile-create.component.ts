@@ -62,7 +62,7 @@ export class ProfileCreateComponent implements OnInit {
           });
         },
         error => {
-          if (error.error.message) {
+          if (error.error && error.error.message) {
             this.messageService.addError(error.error.message);
           } else if (error.status !== null && error.status === 0) {
             this.messageService.addError('Brak połączenia z serwerem API!');

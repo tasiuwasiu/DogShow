@@ -32,6 +32,7 @@ import {TokenInterceptor} from './helpers/token.interceptor';
 import {MessageComponent} from './components/message/message.component';
 import {AppRouter} from './app.routing';
 import {ReactiveFormsModule} from '@angular/forms';
+import {AppLoadModule} from './appLoad.module';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     BrowserModule,
     AppRouter,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppLoadModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}

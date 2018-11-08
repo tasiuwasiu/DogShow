@@ -1,12 +1,14 @@
 <div>
+  {{getTitle()}}
   <nav>
     <a *ngIf="!isLogged()" href="login">Logowanie</a>
     <a *ngIf="isLogged()" href="login">Wyloguj</a>
     <a *ngIf="isAdmin() || isOrganizator()" href="setup/init">Ustawienia początkowe</a>
+    <a *ngIf="isAdmin() || isOrganizator()" href="place/create">dodaj miejsce</a>
     <a *ngIf="!isLogged()" href="register">Rejestracja</a>
     <a *ngIf="isLogged()" href="profile/edit">Edycja</a>
     <a *ngIf="isLogged()" href="dog/add">dodaj psa</a>
-  </nav>
+    <a *ngIf="isLogged()" href="profile/">profil</a></nav>
 </div>
 <app-message></app-message>
 <router-outlet></router-outlet>

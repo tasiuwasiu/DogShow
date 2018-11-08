@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthorizationService} from '../../../services/Authorization/authorization.service';
+import {User} from '../../../models/User.model';
 
 @Component({
   selector: 'app-profile-details',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileDetailsComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(private authorizationService: AuthorizationService) {
+  }
 
   ngOnInit() {
+    this.user = this.authorizationService.getCurrentUser();
   }
 
 }
