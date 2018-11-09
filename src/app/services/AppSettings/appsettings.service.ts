@@ -13,7 +13,7 @@ import {AppSettings} from '../../models/AppSettings.model';
 export class AppSettingsService {
 
   private settingsChangedSource = new Subject<boolean>();
-  setttingChanged$ = this.settingsChangedSource.asObservable();
+  settingChanged$ = this.settingsChangedSource.asObservable();
 
   appTitle = '';
   appState = AppStates.canEnter;

@@ -1,36 +1,132 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
+  <div class="form-group">
+    <div>
+      <label>Group: </label>
+      <select (change)="getSections($event.target.value)">
+        <option value="0"></option>
+        <option *ngFor="let group of groups" value={{group.groupId}}>
+          {{group.namePolish}}
+        </option>
+      </select>
+    </div>
 
-  <div>
-    <label>Group: </label>
-    <select (change)="getSections($event.target.value)">
-      <option value="0"></option>
-      <option *ngFor="let group of groups" value={{group.groupId}}>
-        {{group.namePolish}}
-      </option>
-    </select>
+    <div>
+      <label>Section: </label>
+      <select (change)="getBreeds($event.target.value)">
+        <option value="0"></option>
+        <option *ngFor="let section of sections" value={{section.sectionId}}>
+          {{section.namePolish}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Breed: </label>
+      <select formControlName="breedId">
+        <option value="0"></option>
+        <option *ngFor="let breed of breeds" [ngValue]="breed.breedId">
+          {{breed.namePolish}}
+        </option>
+      </select>
+    </div>
   </div>
-
-  <div>
-    <label>Section: </label>
-    <select (change)="getBreeds($event.target.value)">
-      <option value="0"></option>
-      <option *ngFor="let section of sections" value={{section.sectionId}}>
-        {{section.namePolish}}
-      </option>
-    </select>
+  
+  <div class="form-group">
+    <div>
+      <label>Klasa: </label>
+      <select formControlName="classId">
+        <option *ngFor="let class of classes" value={{class.classId}}>
+          {{class.namePolish}}
+        </option>
+      </select>
+    </div>
   </div>
 
   <div class="form-group">
-    <label>Breed: </label>
-    <select formControlName="breedId">
-      <option value="0"></option>
-      <option *ngFor="let breed of breeds" [ngValue]="breed.breedId">
-        {{breed.namePolish}}
-      </option>
-    </select>
+    <label for="name">Nazwa</label>
+    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.name.errors }" />
+    <div *ngIf="isSubmitted && f.name.errors" class="invalid-feedback">
+      <div *ngIf="f.name.errors.required">Username is required</div>
+    </div>
   </div>
 
+  <div class="form-group">
+    <label for="lineageNumber">Lineagenumber</label>
+    <input type="text" formControlName="lineageNumber" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.lineageNumber.errors }" />
+    <div *ngIf="isSubmitted && f.lineageNumber.errors" class="invalid-feedback">
+      <div *ngIf="f.lineageNumber.errors.required">Username is required</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="registrationNumber">registration</label>
+    <input type="text" formControlName="registrationNumber" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.registrationNumber.errors }" />
+    <div *ngIf="isSubmitted && f.registrationNumber.errors" class="invalid-feedback">
+      <div *ngIf="f.registrationNumber.errors.required">Username is required</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="titles">titles</label>
+    <input type="text" formControlName="titles" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.titles.errors }" />
+    <div *ngIf="isSubmitted && f.titles.errors" class="invalid-feedback">
+      <div *ngIf="f.titles.errors.required">Username is required</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="chipNumber">chipnumber</label>
+    <input type="text" formControlName="chipNumber" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.chipNumber.errors }" />
+    <div *ngIf="isSubmitted && f.chipNumber.errors" class="invalid-feedback">
+      <div *ngIf="f.chipNumber.errors.required">Username is required</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div>
+      <label>Płeć: </label>
+      <select formControlName="sex">
+        <option value="M">Pies</option>
+        <option value="F">Suka</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Data narodzin: </label>
+    <input type="date" formControlName="birthday">
+  </div>
+
+  <div class="form-group">
+    <label for="fatherName">fathet</label>
+    <input type="text" formControlName="fatherName" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.fatherName.errors }" />
+    <div *ngIf="isSubmitted && f.fatherName.errors" class="invalid-feedback">
+      <div *ngIf="f.fatherName.errors.required">Username is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="motherName">mother</label>
+    <input type="text" formControlName="motherName" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.motherName.errors }" />
+    <div *ngIf="isSubmitted && f.motherName.errors" class="invalid-feedback">
+      <div *ngIf="f.motherName.errors.required">Username is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="breederName">breeder</label>
+    <input type="text" formControlName="breederName" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.breederName.errors }" />
+    <div *ngIf="isSubmitted && f.breederName.errors" class="invalid-feedback">
+      <div *ngIf="f.breederName.errors.required">Username is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="breederAddress">breederaddress</label>
+    <input type="text" formControlName="breederAddress" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.breederAddress.errors }" />
+    <div *ngIf="isSubmitted && f.breederAddress.errors" class="invalid-feedback">
+      <div *ngIf="f.breederAddress.errors.required">Username is required</div>
+    </div>
+  </div>
+  
   <div class="form-group">
     <button [disabled]="isProcessing" class="btn btn-primary">Zapisz</button>
     <img *ngIf="isProcessing"

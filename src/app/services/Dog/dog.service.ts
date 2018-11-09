@@ -5,6 +5,7 @@ import {Dog} from '../../models/Dog.model';
 import {DogBreed} from '../../models/DogBreed.model';
 import {BreedGroup} from '../../models/BreedGroup.model';
 import {BreedSection} from '../../models/BreedSection.model';
+import {DogClass} from '../../models/DogClass.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,8 @@ export class DogService {
   }
 
   getDogsByUserID(userId: number) {
-
+    return this.httpClient.get<Dog[]>(`${environment.apiUrl}dog/getByUserId/${userId}`);
   }
-
 
   getBreedsInSection(sectionID: number) {
     return this.httpClient.get<DogBreed[]>(`${environment.apiUrl}dog/getBreedsInSection/${sectionID}`);
@@ -35,5 +35,15 @@ export class DogService {
     return this.httpClient.get<BreedGroup[]>(`${environment.apiUrl}dog/getGroups`);
   }
 
+  getClasses() {
+    return this.httpClient.get<DogClass[]>(`${environment.apiUrl}dog/getClasses`);
+  }
 
+  addDog(newDog: Dog) {
+    return this.httpClient.post(`${environment.apiUrl}dog/add`, newDog);
+  }
+
+  editDog(dogId: number, newDog: Dog) {
+    return this.httpClient.put(`${environment.apiUrl}dog/edit/${dogId}`, newDog);
+  }
 }

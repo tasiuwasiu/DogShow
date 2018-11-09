@@ -7,6 +7,10 @@ import {BreedGroup} from '../../../models/BreedGroup.model';
 import {BreedSection} from '../../../models/BreedSection.model';
 import {DogBreed} from '../../../models/DogBreed.model';
 import {Dog} from '../../../models/Dog.model';
+import {AuthorizationService} from '../../../services/Authorization/authorization.service';
+import {DogClass} from '../../../models/DogClass.model';
+import {V} from '@angular/core/src/render3';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dog-create',
@@ -21,19 +25,35 @@ export class DogCreateComponent implements OnInit {
   groups: BreedGroup[];
   sections: BreedSection[];
   breeds: DogBreed[];
+  classes: DogClass[];
   dog: Dog;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private dogService: DogService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private authorizationService: AuthorizationService) {
   }
 
   ngOnInit() {
     this.dogService.getAllGroups().subscribe(
       data => {
         this.groups = data;
-        console.log(this.groups);
+      },
+      error => {
+        if (error.error && error.error.message) {
+          this.messageService.addError(error.error.message);
+        } else if (error.status !== null && error.status === 0) {
+          this.messageService.addError('Brak połączenia z serwerem API!');
+        } else {
+          this.messageService.addError('Błąd pobierania');
+        }
+      }
+    );
+
+    this.dogService.getClasses().subscribe(
+      data => {
+        this.classes = data;
       },
       error => {
         if (error.error && error.error.message) {
@@ -47,7 +67,19 @@ export class DogCreateComponent implements OnInit {
     );
 
     this.registerForm = this.formBuilder.group({
-      breedId: ['', Validators.required]
+      breedId: ['', Validators.required],
+      classId: ['', Validators.required],
+      name: ['', Validators.required],
+      lineageNumber: [''],
+      registrationNumber: [''],
+      titles: [''],
+      chipNumber: ['', Validators.required],
+      sex: ['', Validators.required],
+      birthday: ['', Validators.required],
+      fatherName: ['', Validators.required],
+      motherName: ['', Validators.required],
+      breederName: ['', Validators.required],
+      breederAddress: ['', Validators.required]
     });
   }
 
@@ -90,24 +122,50 @@ export class DogCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isSubmitted = true;
+    if (this.registerForm.invalid) {
+      return;
+    }
+
     this.dog = {
       dogID: 0,
-      ownerID: 0,
+      ownerID: this.authorizationService.getCurrentUserID(),
       breedID: this.f.breedId.value,
-      classID: 0,
-      name: '',
-      lineageNumber: '',
-      registrationNumber: '',
-      titles: '',
-      chipNumber: '',
-      sex: '',
-      birthday: '',
-      fatherName: '',
-      motherName: '',
-      breederName: '',
-      breederAddress: ''
+      classID: this.f.classId.value,
+      name: this.f.name.value,
+      lineageNumber: this.f.lineageNumber.value,
+      registrationNumber: this.f.registrationNumber.value,
+      titles: this.f.titles.value,
+      chipNumber: this.f.chipNumber.value,
+      sex: this.f.sex.value,
+      birthday: this.f.birthday.value,
+      fatherName: this.f.fatherName.value,
+      motherName: this.f.motherName.value,
+      breederName: this.f.breederName.value,
+      breederAddress: this.f.breederAddress.value
     };
-    console.log(this.dog);
+
+    this.isProcessing = true;
+    this.dogService.addDog(this.dog)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(['/dog/list']).then(() => {
+            this.messageService.removeMessages();
+            this.messageService.addSuccess('Zarejestrowano psa: ' + this.dog.name);
+          });
+        },
+        error => {
+          if (error.error && error.error.message) {
+            this.messageService.addError(error.error.message);
+          } else if (error.status !== null && error.status === 0) {
+            this.messageService.addError('Brak połączenia z serwerem API!');
+          } else {
+            this.messageService.addError('Błąd rejestracji');
+          }
+          this.isProcessing = false;
+        }
+      );
   }
 
 }

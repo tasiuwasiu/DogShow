@@ -12,6 +12,11 @@ import {PlaceListComponent} from './components/place/place-list/place-list.compo
 import {PlaceEditComponent} from './components/place/place-edit/place-edit.component';
 import {InformationWinnersComponent} from './components/information/information-winners/information-winners.component';
 import {SetupEditComponent} from './components/setup/setup-edit/setup-edit.component';
+import {ContestTypeCreateComponent} from './components/contest-type/contest-type-create/contest-type-create.component';
+import {ContestTypeListComponent} from './components/contest-type/contest-type-list/contest-type-list.component';
+import {ContestTypeEditComponent} from './components/contest-type/contest-type-edit/contest-type-edit.component';
+import {ContestParticipationComponent} from './components/contest/contest-participation/contest-participation.component';
+import {ContestGradeComponent} from './components/contest/contest-grade/contest-grade.component';
 
 
 const routes: Routes = [
@@ -33,8 +38,15 @@ const routes: Routes = [
   {path: 'place', component: PlaceListComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   {path: 'place/:id', component: PlaceEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   {path: 'place/create', component: PlaceCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  // contest type
+  {path: 'contesttype', component: ContestTypeListComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'contesttype/create', component: ContestTypeCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'contesttype/edit/:id', component: ContestTypeEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   // contest
 
+
+  {path: 'contest/participate/:id', component: ContestParticipationComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
+  {path: 'contest/grade/:id', component: ContestGradeComponent, canActivate: [AuthGuardService], data: {auth: '3'}},
 
   // default
   {path: '**', redirectTo: ''}

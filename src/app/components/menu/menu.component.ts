@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
   title = '';
   appState: AppStates = AppStates.canEnter;
   isLogged = false;
+  isJudge = false;
   isOrganizator = false;
 
   constructor(private authorizationService: AuthorizationService,
@@ -22,7 +23,7 @@ export class MenuComponent implements OnInit {
         this.refreshLoginData();
       }
     );
-    this.appSettingsService.setttingChanged$.subscribe(
+    this.appSettingsService.settingChanged$.subscribe(
       data => {
         this.refreshSettings();
       }
@@ -36,6 +37,7 @@ export class MenuComponent implements OnInit {
 
   refreshLoginData() {
     this.isLogged = this.authorizationService.hasPermission('5');
+    this.isJudge = this.authorizationService.hasPermission('3');
     this.isOrganizator = this.authorizationService.hasPermission('2');
   }
 

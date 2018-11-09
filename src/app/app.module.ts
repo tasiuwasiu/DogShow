@@ -29,7 +29,7 @@ import {TokenInterceptor} from './helpers/token.interceptor';
 import {MessageComponent} from './components/message/message.component';
 import {AppRouter} from './app.routing';
 import {ReactiveFormsModule} from '@angular/forms';
-import {AppLoadModule} from './appLoad.module';
+import {AppLoadModule} from './app-load.module';
 import {ContestTypeEditComponent} from './components/contest-type/contest-type-edit/contest-type-edit.component';
 import { MenuComponent } from './components/menu/menu.component';
 
