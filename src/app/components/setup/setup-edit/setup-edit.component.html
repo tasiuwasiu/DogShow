@@ -1,3 +1,6 @@
-<p>
-  setup-edit works!
-</p>
+
+  <input #titleInput type="text" required>
+  <button (click)="setTitle(titleInput.value)">Zapisz tytuł</button>
+
+  <input #appStateInput type="number" required>
+  <button (click)="setAppState(appStateInput.value)">Zapisz stan</button>

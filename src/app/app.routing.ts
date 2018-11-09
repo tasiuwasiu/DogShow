@@ -1,7 +1,6 @@
 import {Routes, RouterModule} from '@angular/router';
 import {InformationScheduleComponent} from './components/information/information-schedule/information-schedule.component';
 import {LoginComponent} from './components/login/login/login.component';
-import {SetupInitComponent} from './components/setup/setup-init/setup-init.component';
 import {AuthGuardService} from './services/AuthGuard/auth-guard.service';
 import {ProfileCreateComponent} from './components/profile/profile-create/profile-create.component';
 import {ProfileDetailsComponent} from './components/profile/profile-details/profile-details.component';
@@ -12,6 +11,7 @@ import {PlaceCreateComponent} from './components/place/place-create/place-create
 import {PlaceListComponent} from './components/place/place-list/place-list.component';
 import {PlaceEditComponent} from './components/place/place-edit/place-edit.component';
 import {InformationWinnersComponent} from './components/information/information-winners/information-winners.component';
+import {SetupEditComponent} from './components/setup/setup-edit/setup-edit.component';
 
 
 const routes: Routes = [
@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: ProfileCreateComponent},
   // setup
-  {path: 'setup/init', component: SetupInitComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'settings', component: SetupEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   // dog
   {path: 'dog/add', component: DogCreateComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'dog/list', component: DogListComponent, canActivate: [AuthGuardService], data: {auth: '4'}},

@@ -5,11 +5,15 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {User} from '../../models/User.model';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizationService {
+
+  private loginChangedSource = new Subject<boolean>();
+  loginChanged$ = this.loginChangedSource.asObservable();
 
   constructor(private httpClient: HttpClient) {
   }
@@ -19,6 +23,7 @@ export class AuthorizationService {
       .pipe(map(user => {
         if (user && user.token) {
           localStorage.setItem('currentUser', JSON.stringify(user));
+          this.loginChangedSource.next(true);
         }
         return user;
       }));
@@ -26,6 +31,7 @@ export class AuthorizationService {
 
   logout() {
     localStorage.removeItem('currentUser');
+    this.loginChangedSource.next(false);
   }
 
   hasPermission(permissionLevel: PermissionLevel): boolean {

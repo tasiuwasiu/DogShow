@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AppSettingsService} from '../../../services/AppSettings/appsettings.service';
 
 @Component({
   selector: 'app-setup-edit',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SetupEditComponent implements OnInit {
 
-  constructor() { }
+  title: string;
+  appState: number;
+
+  constructor(private appSettingsService: AppSettingsService) { }
 
   ngOnInit() {
+    this.title = this.appSettingsService.appTitle;
+    this.appState = this.appSettingsService.appState;
   }
 
+  setTitle(title: string) {
+    this.appSettingsService.setTitle(title);
+  }
+
+  setAppState(appState: number) {
+    this.appSettingsService.setAppState(appState);
+  }
 }

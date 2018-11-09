@@ -2,10 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './components/app.component';
-import {SetupInitComponent} from './components/setup/setup-init/setup-init.component';
-import {SetupDetailsComponent} from './components/setup/setup-details/setup-details.component';
 import {SetupEditComponent} from './components/setup/setup-edit/setup-edit.component';
-import {SetupCloseComponent} from './components/setup/setup-close/setup-close.component';
 import {ProfileCreateComponent} from './components/profile/profile-create/profile-create.component';
 import {ProfileDetailsComponent} from './components/profile/profile-details/profile-details.component';
 import {ProfileEditComponent} from './components/profile/profile-edit/profile-edit.component';
@@ -34,14 +31,12 @@ import {AppRouter} from './app.routing';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppLoadModule} from './appLoad.module';
 import {ContestTypeEditComponent} from './components/contest-type/contest-type-edit/contest-type-edit.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SetupInitComponent,
-    SetupDetailsComponent,
     SetupEditComponent,
-    SetupCloseComponent,
     ProfileCreateComponent,
     ProfileDetailsComponent,
     ProfileEditComponent,
@@ -64,7 +59,8 @@ import {ContestTypeEditComponent} from './components/contest-type/contest-type-e
     InformationScheduleComponent,
     LoginComponent,
     MessageComponent,
-    ContestTypeEditComponent
+    ContestTypeEditComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
