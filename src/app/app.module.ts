@@ -1,6 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 import {AppComponent} from './components/app.component';
 import {SetupEditComponent} from './components/setup/setup-edit/setup-edit.component';
 import {ProfileCreateComponent} from './components/profile/profile-create/profile-create.component';
@@ -28,7 +30,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './helpers/token.interceptor';
 import {MessageComponent} from './components/message/message.component';
 import {AppRouter} from './app.routing';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppLoadModule} from './app-load.module';
 import {ContestTypeEditComponent} from './components/contest-type/contest-type-edit/contest-type-edit.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -67,7 +69,9 @@ import { MenuComponent } from './components/menu/menu.component';
     AppRouter,
     ReactiveFormsModule,
     HttpClientModule,
-    AppLoadModule
+    FormsModule,
+    AppLoadModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}

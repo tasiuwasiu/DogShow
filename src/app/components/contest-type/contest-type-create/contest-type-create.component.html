@@ -1,7 +1,73 @@
-//name
 
 
-//can enter
+
+<div>
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+
+    //name
+    <div class="form-group">
+      <label for="name">Nazwa</label>
+      <input type="text" formControlName="name" class="form-control"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.name.errors }"/>
+      <div *ngIf="isSubmitted && f.name.errors" class="invalid-feedback">
+        <div *ngIf="f.name.errors.required">Username is required</div>
+      </div>
+    </div>
+
+    //can enter
+    <div class="form-group">
+      <label>Payed overtime</label>
+      <label>
+        <input type="radio" name="isEnterable" formControlName="isEnterable" [value]="true"/>Yes
+      </label>
+      <label>
+        <input type="radio" name="isEnterable" formControlName="isEnterable" [value]="false"/>No
+      </label>
+    </div>
+
+    //groups
+    <ng-multiselect-dropdown
+      [placeholder]="'Wybór grup'"
+      [data]="groupDropdownList"
+      [(ngModel)]="groupSelectedItems"
+      [settings]="groupDropdownSettings"
+      (onSelect)="onGroupSelect($event)"
+      (onDeSelect)="onGroupDeselect($event)"
+      [disabled]="isProcessing"
+      [ngModelOptions]="{standalone: true}">
+    </ng-multiselect-dropdown>
 
 
-//breeds
+    //sections
+    <input type="checkbox" [checked]="sectionSelected" (change)="sectionSelected = !sectionSelected; onSectionSelectorChanged()">
+    <ng-multiselect-dropdown
+      [placeholder]="'Wybór sekcji'"
+      [data]="sectionDropdownList"
+      [(ngModel)]="sectionSelectedItems"
+      [settings]="sectionDropdownSettings"
+      (onSelect)="onSectionSelect($event)"
+      (onDeSelect)="onSectionDeselect($event)"
+      [disabled]="!sectionSelected || isProcessing"
+      [ngModelOptions]="{standalone: true}"
+    >
+    </ng-multiselect-dropdown>
+
+    //breeds
+    <input type="checkbox" [checked]="breedSelected" (change)="breedSelected = !breedSelected; onBreedSelectorChanged()">
+    <ng-multiselect-dropdown
+      [placeholder]="'Wybór ras'"
+      [data]="breedDropdownList"
+      [(ngModel)]="breedSelectedItems"
+      [settings]="breedDropdownSettings"
+      [disabled]="!breedSelected || isProcessing"
+      [ngModelOptions]="{standalone: true}"
+    >
+    </ng-multiselect-dropdown>
+
+    <div class="form-group">
+      <button [disabled]="isProcessing" class="btn btn-primary">Zapisz</button>
+      <img *ngIf="isProcessing"
+           src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+    </div>
+  </form>
+</div>
