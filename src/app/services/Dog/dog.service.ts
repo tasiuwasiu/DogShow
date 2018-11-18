@@ -44,11 +44,17 @@ export class DogService {
     return this.httpClient.post(`${environment.apiUrl}dog/add`, newDog);
   }
 
-  getGroupSectionfromBreed(breedId: number) {
-
-    return this.httpClient.get<BreedInfo>(`${environment.apiUrl}dog/getGroupSectionfromBreed`);
+  getGroupSectionFromBreed(breedId: number) {
+    return this.httpClient.get<BreedInfo>(`${environment.apiUrl}dog/getGroupSectionfromBreed/${breedId}`);
   }
 
+  getBreedById(breedId: number) {
+    return this.httpClient.get<DogBreed>(`${environment.apiUrl}dog/getBreedById/${breedId}`);
+  }
+
+  getClassById(classId: number) {
+    return this.httpClient.get<DogClass>(`${environment.apiUrl}dog/getClassById/${classId}`);
+  }
 
   editDog(dogId: number, newDog: Dog) {
     return this.httpClient.put(`${environment.apiUrl}dog/edit/${dogId}`, newDog);

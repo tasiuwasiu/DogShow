@@ -9,7 +9,6 @@ import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DogService} from '../../../services/Dog/dog.service';
 import {MessageService} from '../../../services/Message/message.service';
-import {AuthorizationService} from '../../../services/Authorization/authorization.service';
 import {first} from 'rxjs/operators';
 
 @Component({
@@ -35,8 +34,7 @@ export class DogEditComponent implements OnInit {
               private router: Router,
               private dogService: DogService,
               private messageService: MessageService,
-              private route: ActivatedRoute,
-              private authorizationService: AuthorizationService) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -78,11 +76,11 @@ export class DogEditComponent implements OnInit {
         this.dog = data;
         const offset = (new Date()).getTimezoneOffset() * 60000;
         this.dog.birthday = (new Date(this.dog.birthday + offset)).toISOString().slice(0, -1);
-        this.dogService.getGroupSectionfromBreed(this.dog.breedID).subscribe(
+        this.dogService.getGroupSectionFromBreed(this.dog.breedID).subscribe(
           dataB => {
-            //setgroup
+            // setgroup
             this.getSections(dataB.groupId);
-            //setsection
+            // setsection
 
             this.isProcessing = false;
           },
