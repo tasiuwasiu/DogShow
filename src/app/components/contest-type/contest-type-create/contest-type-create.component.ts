@@ -204,6 +204,7 @@ export class ContestTypeCreateComponent implements OnInit {
     }
 
     const newContest: ContestType = {
+      contestTypeId: 0,
       name: this.f.name.value,
       isEnterable: this.f.isEnterable.value,
       breedIds: this.getBreedIds()

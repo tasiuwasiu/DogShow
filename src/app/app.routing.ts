@@ -13,10 +13,14 @@ import {PlaceEditComponent} from './components/place/place-edit/place-edit.compo
 import {InformationWinnersComponent} from './components/information/information-winners/information-winners.component';
 import {SetupEditComponent} from './components/setup/setup-edit/setup-edit.component';
 import {ContestTypeCreateComponent} from './components/contest-type/contest-type-create/contest-type-create.component';
-import {ContestTypeListComponent} from './components/contest-type/contest-type-list/contest-type-list.component';
-import {ContestTypeEditComponent} from './components/contest-type/contest-type-edit/contest-type-edit.component';
 import {ContestParticipationComponent} from './components/contest/contest-participation/contest-participation.component';
 import {ContestGradeComponent} from './components/contest/contest-grade/contest-grade.component';
+import {DogDetailsComponent} from './components/dog/dog-details/dog-details.component';
+import {DogEditComponent} from './components/dog/dog-edit/dog-edit.component';
+import {ContestListComponent} from './components/contest/contest-list/contest-list.component';
+import {ContestDisplayComponent} from './components/contest/contest-display/contest-display.component';
+import {ContestCreateComponent} from './components/contest/contest-create/contest-create.component';
+import {ContestEditComponent} from './components/contest/contest-edit/contest-edit.component';
 
 
 const routes: Routes = [
@@ -33,19 +37,20 @@ const routes: Routes = [
   {path: 'settings', component: SetupEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   // dog
   {path: 'dog/add', component: DogCreateComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
+  {path: 'dog/edit/:id', component: DogEditComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'dog/list', component: DogListComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
+  {path: 'dog/details/:id', component: DogDetailsComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   // place
   {path: 'place', component: PlaceListComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   {path: 'place/:id', component: PlaceEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   {path: 'place/create', component: PlaceCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
-  // contest type
-  {path: 'contesttype', component: ContestTypeListComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
-  {path: 'contesttype/create', component: ContestTypeCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
-  {path: 'contesttype/edit/:id', component: ContestTypeEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   // contest
-
-
-  {path: 'contest/participate/:id', component: ContestParticipationComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
+  {path: 'contesttype/create', component: ContestTypeCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'contest/edit/:id', component: ContestEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'contest/create', component: ContestCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'contest/list', component: ContestListComponent},
+  {path: 'contest/details/:id', component: ContestDisplayComponent},
+  {path: 'contest/participate', component: ContestParticipationComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'contest/grade/:id', component: ContestGradeComponent, canActivate: [AuthGuardService], data: {auth: '3'}},
 
   // default

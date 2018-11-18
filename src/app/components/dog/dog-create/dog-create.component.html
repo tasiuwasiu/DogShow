@@ -94,9 +94,12 @@
   </div>
 
   <div class="form-group">
-    <label>Data narodzin: </label>
-    <input type="date" formControlName="birthday">
+    <label>Data urodzin:</label>
+    <input formControlName="birthday"
+           [owlDateTimeTrigger]="dtPicker" [owlDateTime]="dtPicker" [max]="today">
+    <owl-date-time #dtPicker [pickerType]="'calendar'"  [firstDayOfWeek]="1"></owl-date-time>
   </div>
+
 
   <div class="form-group">
     <label for="fatherName">fathet</label>

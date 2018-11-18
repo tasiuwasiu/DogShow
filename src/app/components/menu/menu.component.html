@@ -14,7 +14,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="infoDropdown">
             <a href="schedule" class="dropdown-item">Terminarz</a>
-            <a href="results" class="dropdown-item">Wyniki</a>
+            <a *ngIf="appState > 10" href="results" class="dropdown-item">Wyniki</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -24,8 +24,9 @@
             Konkursy
           </a>
           <div class="dropdown-menu" aria-labelledby="contestDropdown">
-            <a href="contesttype/create" class="dropdown-item">Dodaj konkurs</a>
-
+            <a *ngIf="isOrganizator && appState === 10" href="contesttype/create" class="dropdown-item">Dodaj konkurs</a>
+            <a *ngIf="isOrganizator && appState === 10" href="contest/create" class="dropdown-item">Zaplanuj konkurs</a>
+            <a href="contest/list" class="dropdown-item">Lista konkursów</a>
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="isOrganizator">
@@ -47,6 +48,7 @@
           <div class="dropdown-menu" aria-labelledby="dogDropdown">
             <a href="dog/add" class="dropdown-item">Dodaj psa</a>
             <a href="dog/list" class="dropdown-item">Lista moich psów</a>
+            <a href="contest/participate" class="dropdown-item">Zapisz psa na konkurs</a>
           </div>
         </li>
         <li class="nav-item" *ngIf="isOrganizator">

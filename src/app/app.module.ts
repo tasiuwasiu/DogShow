@@ -1,4 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, Title} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -9,7 +9,6 @@ import {ProfileCreateComponent} from './components/profile/profile-create/profil
 import {ProfileDetailsComponent} from './components/profile/profile-details/profile-details.component';
 import {ProfileEditComponent} from './components/profile/profile-edit/profile-edit.component';
 import {ContestTypeCreateComponent} from './components/contest-type/contest-type-create/contest-type-create.component';
-import {ContestTypeListComponent} from './components/contest-type/contest-type-list/contest-type-list.component';
 import {DogCreateComponent} from './components/dog/dog-create/dog-create.component';
 import {DogEditComponent} from './components/dog/dog-edit/dog-edit.component';
 import {DogDetailsComponent} from './components/dog/dog-details/dog-details.component';
@@ -32,8 +31,12 @@ import {MessageComponent} from './components/message/message.component';
 import {AppRouter} from './app.routing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppLoadModule} from './app-load.module';
-import {ContestTypeEditComponent} from './components/contest-type/contest-type-edit/contest-type-edit.component';
 import { MenuComponent } from './components/menu/menu.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {Ng2CompleterModule} from 'ng2-completer';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +46,6 @@ import { MenuComponent } from './components/menu/menu.component';
     ProfileDetailsComponent,
     ProfileEditComponent,
     ContestTypeCreateComponent,
-    ContestTypeListComponent,
     DogCreateComponent,
     DogEditComponent,
     DogDetailsComponent,
@@ -61,7 +63,6 @@ import { MenuComponent } from './components/menu/menu.component';
     InformationScheduleComponent,
     LoginComponent,
     MessageComponent,
-    ContestTypeEditComponent,
     MenuComponent
   ],
   imports: [
@@ -71,10 +72,17 @@ import { MenuComponent } from './components/menu/menu.component';
     HttpClientModule,
     FormsModule,
     AppLoadModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    BrowserAnimationsModule,
+    Ng2SmartTableModule,
+    Ng2CompleterModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+    Title,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: OWL_DATE_TIME_LOCALE, useValue: 'pl'},
   ],
   bootstrap: [AppComponent]
 })

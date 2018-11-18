@@ -1,3 +1,56 @@
-<p>
-  contest-create works!
-</p>
+<div>
+  //wybór contest type
+
+  <div class="form-group">
+    <ng-multiselect-dropdown
+      [placeholder]="'Wybór konkursu'"
+      [data]="contestTypeDropdownList"
+      [(ngModel)]="contestTypeSelectedItems"
+      [settings]="contestTypeDropdownSettings"
+      [disabled]="isProcessing"
+      [ngModelOptions]="{standalone: true}">
+    </ng-multiselect-dropdown>
+    <div *ngIf="isSubmitted && contestTypeError" class="invalid-feedback">
+      <div>Username is required</div>
+    </div>
+  </div>
+
+  //data start
+  <div class="form-group">
+    <label>Początek:</label>
+    <input formControlName="startDate"
+           [owlDateTimeTrigger]="dtPicker" [owlDateTime]="dtPicker">
+    <owl-date-time #dtPicker [pickerType]="'both'" [firstDayOfWeek]="1"></owl-date-time>
+
+    <div *ngIf="isSubmitted && f.startDate.errors" class="invalid-feedback">
+      <div *ngIf="f.startDate.errors.required">Username is required</div>
+    </div>
+  </div>
+
+  //data koniec
+  <div class="form-group">
+    <label>koniec:</label>
+    <input formControlName="endDate"
+           [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
+    <owl-date-time #dtPicker2 [pickerType]="'both'" [firstDayOfWeek]="1"></owl-date-time>
+
+    <div *ngIf="isSubmitted && f.endDate.errors" class="invalid-feedback">
+      <div *ngIf="f.endDate.errors.required">Username is required</div>
+    </div>
+  </div>
+  //wybor miejsca
+  <div class="form-group">
+    <ng-multiselect-dropdown
+      [placeholder]="'Wybór miejsca'"
+      [data]="placeDropdownList"
+      [(ngModel)]="placeSelectedItems"
+      [settings]="placeDropdownSettings"
+      [disabled]="isProcessing"
+      [ngModelOptions]="{standalone: true}">
+    </ng-multiselect-dropdown>
+    <div *ngIf="isSubmitted && placeError" class="invalid-feedback">
+      <div>Username is required</div>
+    </div>
+  </div>
+
+</div>

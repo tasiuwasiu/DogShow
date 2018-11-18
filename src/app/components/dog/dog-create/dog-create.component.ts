@@ -9,8 +9,8 @@ import {DogBreed} from '../../../models/DogBreed.model';
 import {Dog} from '../../../models/Dog.model';
 import {AuthorizationService} from '../../../services/Authorization/authorization.service';
 import {DogClass} from '../../../models/DogClass.model';
-import {V} from '@angular/core/src/render3';
 import {first} from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dog-create',
@@ -28,7 +28,10 @@ export class DogCreateComponent implements OnInit {
   classes: DogClass[];
   dog: Dog;
 
-  constructor(private formBuilder: FormBuilder,
+  today = new Date();
+
+  constructor(private titleService: Title,
+              private formBuilder: FormBuilder,
               private router: Router,
               private dogService: DogService,
               private messageService: MessageService,
@@ -36,6 +39,7 @@ export class DogCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Rejestracja psa');
     this.dogService.getAllGroups().subscribe(
       data => {
         this.groups = data;
@@ -75,7 +79,7 @@ export class DogCreateComponent implements OnInit {
       titles: [''],
       chipNumber: ['', Validators.required],
       sex: ['', Validators.required],
-      birthday: ['', Validators.required],
+      birthday: [new Date(), Validators.required],
       fatherName: ['', Validators.required],
       motherName: ['', Validators.required],
       breederName: ['', Validators.required],
@@ -122,10 +126,14 @@ export class DogCreateComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.isSubmitted = true;
     if (this.registerForm.invalid) {
       return;
     }
+    const date = this.f.birthday.value;
+    const offset = (new Date()).getTimezoneOffset() * 60000;
+    const correctDate = (new Date(date - offset)).toISOString().slice(0, -1);
 
     this.dog = {
       dogID: 0,
@@ -138,12 +146,14 @@ export class DogCreateComponent implements OnInit {
       titles: this.f.titles.value,
       chipNumber: this.f.chipNumber.value,
       sex: this.f.sex.value,
-      birthday: this.f.birthday.value,
+      birthday: correctDate,
       fatherName: this.f.fatherName.value,
       motherName: this.f.motherName.value,
       breederName: this.f.breederName.value,
       breederAddress: this.f.breederAddress.value
     };
+
+    console.log (this.dog);
 
     this.isProcessing = true;
     this.dogService.addDog(this.dog)
@@ -166,6 +176,7 @@ export class DogCreateComponent implements OnInit {
           this.isProcessing = false;
         }
       );
+
   }
 
 }
