@@ -83,8 +83,8 @@ export class ContestCreateComponent implements OnInit {
       allowSearchFilter: true
     };
     this.createForm = this.formBuilder.group({
-      startDate: [new Date(), Validators.required],
-      endDate: [new Date(), Validators.required]
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required]
     });
   }
 

@@ -18,8 +18,7 @@ export class PlaceCreateComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private placeService: PlaceService,
-              private messageService: MessageService) {
-  }
+              private messageService: MessageService) { }
 
   ngOnInit() {
     this.createForm = this.formBuilder.group({

@@ -20,6 +20,11 @@ export class ContestService {
     return this.httpClient.post(`${environment.apiUrl}contest/add`, newContest);
   }
 
+  getContests() {
+    return this.httpClient.get<Contest[]>(`${environment.apiUrl}contest/getAll`);
+  }
+
+
   getAvaiableContestsByDogBreed (breedId: number) {
 
   }

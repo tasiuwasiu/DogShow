@@ -1,6 +1,6 @@
 <div *ngIf="messageService.hasMessages">
   <div *ngIf="messageService.errorMessages">
-    <div *ngFor='let error of messageService.errorMessages; let i = index' class="alert alert-danger">
+    <div *ngFor='let error of messageService.errorMessages; let i = index' class="alert alert-danger alert-margin">
       {{error}}
       <button type="button" class="close" aria-label="Close" (click)="messageService.removeError(i)">
         <span aria-hidden="true">&times;</span>
@@ -8,7 +8,7 @@
     </div>
   </div>
   <div *ngIf="messageService.warningMessages">
-    <div *ngFor='let warning of messageService.warningMessages; let i = index' class="alert alert-warning">
+    <div *ngFor='let warning of messageService.warningMessages; let i = index' class="alert alert-warning alert-margin">
       {{warning}}
       <button type="button" class="close" aria-label="Close" (click)="messageService.removeWarning(i)">
         <span aria-hidden="true">&times;</span>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div *ngIf="messageService.successMessages">
-    <div *ngFor='let success of messageService.successMessages; let i = index' class="alert alert-success">
+    <div *ngFor='let success of messageService.successMessages; let i = index' class="alert alert-success alert-margin">
       {{success}}
       <button type="button" class="close" aria-label="Close" (click)="messageService.removeSuccess(i)">
         <span aria-hidden="true">&times;</span>

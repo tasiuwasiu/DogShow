@@ -42,7 +42,7 @@ const routes: Routes = [
   {path: 'dog/details/:id', component: DogDetailsComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   // place
   {path: 'place', component: PlaceListComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
-  {path: 'place/:id', component: PlaceEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'place/edit/:id', component: PlaceEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   {path: 'place/create', component: PlaceCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   // contest
   {path: 'contesttype/create', component: ContestTypeCreateComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
