@@ -26,4 +26,8 @@ export class PlaceService {
   getAllPlaces() {
     return this.httpClient.get<Place[]>(`${environment.apiUrl}place`);
   }
+
+  deletePlace(placeId: number) {
+    return this.httpClient.delete(`${environment.apiUrl}place/${placeId}`);
+  }
 }

@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {PlaceService} from '../../../services/Place/place.service';
 import {MessageService} from '../../../services/Message/message.service';
 import {Place} from '../../../models/Place.model';
-import {Router} from '@angular/router';
+import {EditPlaceButtonComponent} from './edit-place-button.component';
+import {DeletePlaceButtonComponent} from './delete-place-button.component';
 
 @Component({
   selector: 'app-place-list',
@@ -12,10 +13,11 @@ import {Router} from '@angular/router';
 export class PlaceListComponent implements OnInit {
 
   places: Place[];
+  tableSettings = {};
+
 
   constructor(private placeService: PlaceService,
-              private messageService: MessageService,
-              private router: Router) {
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -34,10 +36,51 @@ export class PlaceListComponent implements OnInit {
         }
       }
     );
+
+    this.tableSettings = {
+      columns: {
+        placeId: {
+          title: 'ID',
+          editable: false,
+          width: '10%'
+        },
+        name: {
+          title: 'Nazwa',
+          editable: false,
+          width: '60%'
+        },
+        edit: {
+          title: '',
+          type: 'custom',
+          filter: false,
+          sort: false,
+          width: '15%',
+          renderComponent: EditPlaceButtonComponent
+        },
+        delete: {
+          title: '',
+          type: 'custom',
+          filter: false,
+          sort: false,
+          width: '15%',
+          renderComponent: DeletePlaceButtonComponent,
+          onComponentInitFunction: (instance) => {
+            instance.deletedItem.subscribe(placeId => {
+              this.handleDelete(placeId);
+            });
+          }
+        }
+      },
+      actions: {
+        add: false,
+        delete: false,
+        edit: false
+      },
+      noDataMessage: 'Nie odnaleziono danych'
+    };
   }
 
-  editPlace(placeId: number) {
-    this.router.navigate(['/place', placeId]);
+  private handleDelete(placeId: number) {
+    this.places = this.places.filter(place => place.placeId !== placeId);
   }
-
 }

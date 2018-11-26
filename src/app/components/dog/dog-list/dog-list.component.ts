@@ -3,6 +3,10 @@ import {AuthorizationService} from '../../../services/Authorization/authorizatio
 import {MessageService} from '../../../services/Message/message.service';
 import {Title} from '@angular/platform-browser';
 import {DogService} from '../../../services/Dog/dog.service';
+import {EditPlaceButtonComponent} from '../../place/place-list/edit-place-button.component';
+import {DeletePlaceButtonComponent} from '../../place/place-list/delete-place-button.component';
+import {EditDogButtonComponent} from './edit-dog-button.component';
+import {DeleteDogButtonComponent} from './delete-dog-button.component';
 
 @Component({
   selector: 'app-dog-list',
@@ -46,6 +50,27 @@ export class DogListComponent implements OnInit {
         chipNumber: {
           title: 'Nr chipu',
           editable: false
+        },
+        edit: {
+          title: '',
+          type: 'custom',
+          filter: false,
+          sort: false,
+          width: '15%',
+          renderComponent: EditDogButtonComponent
+        },
+        delete: {
+          title: '',
+          type: 'custom',
+          filter: false,
+          sort: false,
+          width: '15%',
+          renderComponent: DeleteDogButtonComponent,
+          onComponentInitFunction: (instance) => {
+            instance.deletedItem.subscribe(dogId => {
+              this.handleDelete(dogId);
+            });
+          }
         }
       },
       actions: {
@@ -54,6 +79,10 @@ export class DogListComponent implements OnInit {
         edit: false
       }
     };
+  }
+
+  private handleDelete(dogId: number) {
+    this.dogs = this.dogs.filter(dog => dog.dogId !== dogId);
   }
 
 }

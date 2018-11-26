@@ -59,4 +59,8 @@ export class DogService {
   editDog(dogId: number, newDog: Dog) {
     return this.httpClient.put(`${environment.apiUrl}dog/edit/${dogId}`, newDog);
   }
+
+  deleteDog(dogId: number) {
+    return this.httpClient.delete(`${environment.apiUrl}dog/${dogId}`);
+  }
 }

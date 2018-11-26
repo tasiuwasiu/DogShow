@@ -1,7 +1,7 @@
 import {BrowserModule, Title} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 import {AppComponent} from './components/app.component';
 import {SetupEditComponent} from './components/setup/setup-edit/setup-edit.component';
@@ -31,11 +31,17 @@ import {MessageComponent} from './components/message/message.component';
 import {AppRouter} from './app.routing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppLoadModule} from './app-load.module';
-import { MenuComponent } from './components/menu/menu.component';
+import {MenuComponent} from './components/menu/menu.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {OWL_DATE_TIME_LOCALE, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import {OWL_DATE_TIME_LOCALE, OwlDateTimeIntl, OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 import {Ng2CompleterModule} from 'ng2-completer';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {SetupJudgeComponent} from './components/setup/setup-judge/setup-judge.component';
+import {PolishIntlOWL} from './helpers/PolishIntlOWL';
+import {DeletePlaceButtonComponent} from './components/place/place-list/delete-place-button.component';
+import {EditPlaceButtonComponent} from './components/place/place-list/edit-place-button.component';
+import {DeleteDogButtonComponent} from './components/dog/dog-list/delete-dog-button.component';
+import {EditDogButtonComponent} from './components/dog/dog-list/edit-dog-button.component';
 
 
 @NgModule({
@@ -63,7 +69,12 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     InformationScheduleComponent,
     LoginComponent,
     MessageComponent,
-    MenuComponent
+    MenuComponent,
+    SetupJudgeComponent,
+    EditPlaceButtonComponent,
+    DeletePlaceButtonComponent,
+    EditDogButtonComponent,
+    DeleteDogButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -79,10 +90,17 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     Ng2SmartTableModule,
     Ng2CompleterModule,
   ],
+  entryComponents: [
+    DeletePlaceButtonComponent,
+    EditPlaceButtonComponent,
+    DeleteDogButtonComponent,
+    EditDogButtonComponent
+  ],
   providers: [
     Title,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: OWL_DATE_TIME_LOCALE, useValue: 'pl'},
+    {provide: OwlDateTimeIntl, useClass: PolishIntlOWL},
   ],
   bootstrap: [AppComponent]
 })

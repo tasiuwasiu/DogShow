@@ -21,6 +21,7 @@ import {ContestListComponent} from './components/contest/contest-list/contest-li
 import {ContestDisplayComponent} from './components/contest/contest-display/contest-display.component';
 import {ContestCreateComponent} from './components/contest/contest-create/contest-create.component';
 import {ContestEditComponent} from './components/contest/contest-edit/contest-edit.component';
+import {SetupJudgeComponent} from './components/setup/setup-judge/setup-judge.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'register', component: ProfileCreateComponent},
   // setup
   {path: 'settings', component: SetupEditComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
+  {path: 'settings/addJudge', component: SetupJudgeComponent, canActivate: [AuthGuardService], data: {auth: '2'}},
   // dog
   {path: 'dog/add', component: DogCreateComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
   {path: 'dog/edit/:id', component: DogEditComponent, canActivate: [AuthGuardService], data: {auth: '4'}},
