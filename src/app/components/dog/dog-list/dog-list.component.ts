@@ -3,8 +3,6 @@ import {AuthorizationService} from '../../../services/Authorization/authorizatio
 import {MessageService} from '../../../services/Message/message.service';
 import {Title} from '@angular/platform-browser';
 import {DogService} from '../../../services/Dog/dog.service';
-import {EditPlaceButtonComponent} from '../../place/place-list/edit-place-button.component';
-import {DeletePlaceButtonComponent} from '../../place/place-list/delete-place-button.component';
 import {EditDogButtonComponent} from './edit-dog-button.component';
 import {DeleteDogButtonComponent} from './delete-dog-button.component';
 

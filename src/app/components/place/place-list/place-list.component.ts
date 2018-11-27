@@ -15,10 +15,8 @@ export class PlaceListComponent implements OnInit {
   places: Place[];
   tableSettings = {};
 
-
   constructor(private placeService: PlaceService,
-              private messageService: MessageService) {
-  }
+              private messageService: MessageService) { }
 
   ngOnInit() {
     this.placeService.getAllPlaces().subscribe(

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {MessageService} from '../Message/message.service';
 import {AppStates} from '../../helpers/AppStates.enum';
-import {TitleSetting} from '../../models/TitleSetting.model';
+import {TitleSetting} from '../../DTOs/TitleSetting.model';
 import {Subject} from 'rxjs';
 import {AppSettings} from '../../models/AppSettings.model';
 
@@ -84,10 +84,6 @@ export class AppSettingsService {
           }
         }
       );
-  }
-
-  getAppState() {
-
   }
 
   getSettings() {

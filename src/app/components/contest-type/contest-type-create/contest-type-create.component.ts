@@ -65,7 +65,9 @@ export class ContestTypeCreateComponent implements OnInit {
       idField: 'groupId',
       textField: 'namePolish',
       enableCheckAll: false,
-      allowSearchFilter: true
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Szukaj',
+      noDataAvailablePlaceholderText: 'Brak danych'
     };
 
     this.sectionDropdownSettings = {
@@ -74,7 +76,9 @@ export class ContestTypeCreateComponent implements OnInit {
       textField: 'namePolish',
       enableCheckAll: false,
       itemsShowLimit: 3,
-      allowSearchFilter: true
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Szukaj',
+      noDataAvailablePlaceholderText: 'Brak danych'
     };
 
     this.breedDropdownSettings = {
@@ -83,7 +87,9 @@ export class ContestTypeCreateComponent implements OnInit {
       textField: 'namePolish',
       enableCheckAll: false,
       itemsShowLimit: 3,
-      allowSearchFilter: true
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Szukaj',
+      noDataAvailablePlaceholderText: 'Brak danych'
     };
 
     // init form
@@ -210,6 +216,27 @@ export class ContestTypeCreateComponent implements OnInit {
       breedIds: this.getBreedIds()
     };
 
+    this.isProcessing = true;
+    this.contestService.addContest(newContest)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(['/contest/list']).then(() => {
+            this.messageService.removeMessages();
+            this.messageService.addSuccess('Utworzono konkurs: ' + newContest.name);
+          });
+        },
+        error => {
+          if (error.error && error.error.message) {
+            this.messageService.addError(error.error.message);
+          } else if (error.status !== null && error.status === 0) {
+            this.messageService.addError('Brak połączenia z serwerem API!');
+          } else {
+            this.messageService.addError('Błąd rejestracji');
+          }
+          this.isProcessing = false;
+        }
+      );
     console.log(newContest);
   }
 

@@ -1,4 +1,4 @@
-export interface BreedInfo {
+export interface BreedGroupInfo {
   groupId: number;
   sectionId: number;
 }

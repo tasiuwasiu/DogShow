@@ -3,7 +3,6 @@ import {ViewCell} from 'ng2-smart-table';
 import {MessageService} from '../../../services/Message/message.service';
 import {PlaceService} from '../../../services/Place/place.service';
 
-
 @Component({
   selector: 'app-delete-place-button-view',
   template: `

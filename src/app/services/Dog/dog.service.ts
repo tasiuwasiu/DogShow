@@ -6,7 +6,8 @@ import {DogBreed} from '../../models/DogBreed.model';
 import {BreedGroup} from '../../models/BreedGroup.model';
 import {BreedSection} from '../../models/BreedSection.model';
 import {DogClass} from '../../models/DogClass.model';
-import {BreedInfo} from '../../models/BreedInfo.model';
+import {BreedGroupInfo} from '../../DTOs/BreedGroupInfo.model';
+import {DogDetails} from '../../DTOs/DogDetails.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,11 @@ export class DogService {
   }
 
   getDogByID(id: number) {
-    return this.httpClient.get<Dog>(`${environment.apiUrl}dog/get/${id}`);
+    return this.httpClient.get<Dog>(`${environment.apiUrl}dog/${id}`);
+  }
+
+  getDogDetailsByID(id: number) {
+    return this.httpClient.get<DogDetails>(`${environment.apiUrl}dog/details/${id}`);
   }
 
   getDogsByUserID(userId: number) {
@@ -45,15 +50,7 @@ export class DogService {
   }
 
   getGroupSectionFromBreed(breedId: number) {
-    return this.httpClient.get<BreedInfo>(`${environment.apiUrl}dog/getGroupSectionfromBreed/${breedId}`);
-  }
-
-  getBreedById(breedId: number) {
-    return this.httpClient.get<DogBreed>(`${environment.apiUrl}dog/getBreedById/${breedId}`);
-  }
-
-  getClassById(classId: number) {
-    return this.httpClient.get<DogClass>(`${environment.apiUrl}dog/getClassById/${classId}`);
+    return this.httpClient.get<BreedGroupInfo>(`${environment.apiUrl}dog/getGroupSectionFromBreed/${breedId}`);
   }
 
   editDog(dogId: number, newDog: Dog) {

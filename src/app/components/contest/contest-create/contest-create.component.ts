@@ -119,7 +119,7 @@ export class ContestCreateComponent implements OnInit {
       placeId: this.placeSelectedItems[0].placeId
     };
     console.log(this.contest);
-    this.contestService.addContest(this.contest)
+    this.contestService.planContest(this.contest)
       .pipe(first())
       .subscribe(
         data => {
