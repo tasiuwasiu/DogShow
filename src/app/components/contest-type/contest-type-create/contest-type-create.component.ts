@@ -33,6 +33,7 @@ export class ContestTypeCreateComponent implements OnInit {
   createForm: FormGroup;
   isProcessing = false;
   isSubmitted = false;
+  breedError = false;
 
   constructor(private router: Router,
               private messageService: MessageService,
@@ -95,7 +96,7 @@ export class ContestTypeCreateComponent implements OnInit {
     // init form
     this.createForm = this.formBuilder.group({
       name: ['', Validators.required],
-      isEnterable: [null, Validators.required]
+      isEnterable: [true, Validators.required]
     });
 
   }
@@ -205,7 +206,9 @@ export class ContestTypeCreateComponent implements OnInit {
   // Form completion methods
   onSubmit() {
     this.isSubmitted = true;
-    if (this.createForm.invalid) {
+    const breeds = this.getBreedIds();
+    this.breedError = breeds.length < 1;
+    if (this.createForm.invalid || this.breedError) {
       return;
     }
 
@@ -213,7 +216,7 @@ export class ContestTypeCreateComponent implements OnInit {
       contestTypeId: 0,
       name: this.f.name.value,
       isEnterable: this.f.isEnterable.value,
-      breedIds: this.getBreedIds()
+      breedIds: breeds
     };
 
     this.isProcessing = true;

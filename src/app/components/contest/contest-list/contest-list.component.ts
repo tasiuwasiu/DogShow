@@ -5,6 +5,7 @@ import {Title} from '@angular/platform-browser';
 import {ContestService} from '../../../services/Contest/contest.service';
 import {EditContestButtonComponent} from './edit-contest-button.component';
 import {DeleteContestButtonComponent} from './delete-contest-button.component';
+import {DetailsContestButtonComponent} from './details-contest-button.component';
 
 @Component({
   selector: 'app-contest-list',
@@ -79,12 +80,20 @@ export class ContestListComponent implements OnInit {
             }
           }
         },
+        details: {
+          title: '',
+          type: 'custom',
+          filter: false,
+          sort: false,
+          width: '10%',
+          renderComponent: DetailsContestButtonComponent
+        },
         edit: {
           title: '',
           type: 'custom',
           filter: false,
           sort: false,
-          width: '15%',
+          width: '10%',
           renderComponent: EditContestButtonComponent
         },
         delete: {
@@ -92,7 +101,7 @@ export class ContestListComponent implements OnInit {
           type: 'custom',
           filter: false,
           sort: false,
-          width: '15%',
+          width: '10%',
           renderComponent: DeleteContestButtonComponent,
           onComponentInitFunction: (instance) => {
             instance.deletedItem.subscribe(contestTypeId => {

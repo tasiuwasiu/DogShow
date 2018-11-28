@@ -1,5 +1,76 @@
-<p>
-  dog-details works!
-</p>
+<div class="col-lg-6 title">
+  <h3>Szczegóły psa</h3>
+</div>
 
-{{dog.birthday}}
+<div class="align-content-center col-lg-8">
+  <div>
+    <label class="col-lg-2" for="name">Nazwa</label>
+    <span class="col-lg-6" id="name">{{dog.name}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="breedName">Rasa</label>
+    <span class="col-lg-6" id="breedName">{{dog.breedName}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="className">Klasa</label>
+    <span class="col-lg-6" id="className">{{dog.className}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="sex">Płeć</label>
+    <span class="col-lg-6" id="sex">{{dog.sex}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="lineageNumber">Numer rodowodu</label>
+    <span class="col-lg-6" id="lineageNumber">{{dog.lineageNumber}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="registrationNumber">Rejestracja oddziałowa</label>
+    <span class="col-lg-6" id="registrationNumber">{{dog.registrationNumber}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="titles">Tytuły</label>
+    <span class="col-lg-6" id="titles">{{dog.titles}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="chipNumber">Numer chipa/tatuażu</label>
+    <span class="col-lg-6" id="chipNumber">{{dog.chipNumber}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="birthday">Data urodzenia</label>
+    <span class="col-lg-6" id="birthday">{{dog.birthday}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="fatherName">Ojciec</label>
+    <span class="col-lg-6" id="fatherName">{{dog.fatherName}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="motherName">Matka</label>
+    <span class="col-lg-6" id="motherName">{{dog.motherName}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="breederName">Hodowca</label>
+    <span class="col-lg-6" id="breederName">{{dog.breederName}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="breederAddress">Adres hodowcy</label>
+    <span class="col-lg-6" id="breederAddress">{{dog.breederAddress}}</span>
+  </div>
+
+  <div>
+    <ng2-smart-table [settings]="tableSettings" [source]="contests"></ng2-smart-table>
+  </div>
+
+</div>
+

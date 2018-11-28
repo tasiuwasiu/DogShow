@@ -45,6 +45,8 @@ import {EditDogButtonComponent} from './components/dog/dog-list/edit-dog-button.
 import {DeleteContestButtonComponent} from './components/contest/contest-list/delete-contest-button.component';
 import {EditContestButtonComponent} from './components/contest/contest-list/edit-contest-button.component';
 import {DetailsDogButtonComponent} from './components/dog/dog-list/details-dog-button.component';
+import {DetailsContestButtonComponent} from './components/contest/contest-list/details-contest-button.component';
+import {DeleteParticipationButtonComponent} from './components/dog/dog-details/delete-participation-button.component';
 
 
 @NgModule({
@@ -80,7 +82,9 @@ import {DetailsDogButtonComponent} from './components/dog/dog-list/details-dog-b
     DeleteDogButtonComponent,
     EditContestButtonComponent,
     DeleteContestButtonComponent,
-    DetailsDogButtonComponent
+    DetailsDogButtonComponent,
+    DetailsContestButtonComponent,
+    DeleteParticipationButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,9 @@ import {DetailsDogButtonComponent} from './components/dog/dog-list/details-dog-b
     EditDogButtonComponent,
     EditContestButtonComponent,
     DeleteContestButtonComponent,
-    DetailsDogButtonComponent
+    DetailsDogButtonComponent,
+    DetailsContestButtonComponent,
+    DeleteParticipationButtonComponent
   ],
   providers: [
     Title,

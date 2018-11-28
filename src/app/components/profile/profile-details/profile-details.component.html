@@ -1,26 +1,29 @@
-<div>
+<div class="col-lg-6 title" >
+  <h3>Profil użytkownika</h3>
+</div>
+
+
+
+<div class="align-content-center col-lg-8">
 
   <div>
-    <label>Imię</label>
-    {{user.firstName}}
+    <label class="col-lg-2" for="firstName">Imię</label>
+    <span class="col-lg-6" id="firstName">{{user.firstName}}</span>
   </div>
 
   <div>
-    <label>Nazwisko</label>
-    {{user.lastName}}
+    <label class="col-lg-2">Nazwisko</label>
+    <span class="col-lg-6">{{user.lastName}}</span>
   </div>
 
   <div>
-    <label>Adres</label>
-    {{user.address}}
+    <label class="col-lg-2">Adres</label>
+    <span class="col-lg-6">{{user.address}}</span>
   </div>
 
   <div>
-    <label>Adres e-mail</label>
-    {{user.email}}
+    <label class="col-lg-2">Adres e-mail</label>
+    <span class="col-lg-6">{{user.email}}</span>
   </div>
 
-  <div>
-  <a href="dog/list">Moje psy</a>
-  </div>
 </div>

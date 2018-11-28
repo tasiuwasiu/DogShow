@@ -5,6 +5,8 @@ import {environment} from '../../../environments/environment';
 import {ContestType} from '../../models/ContestType.model';
 import {Contest} from '../../models/Contest.model';
 import {ContestInfo} from '../../DTOs/ContestInfo.model';
+import {Participation} from '../../models/Participation.model';
+import {DogParticipation} from '../../DTOs/DogParticipation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +14,6 @@ import {ContestInfo} from '../../DTOs/ContestInfo.model';
 export class ContestService {
 
   constructor(private httpClient: HttpClient) { }
-
-  getAvailableContests() {
-    return this.httpClient.get<ContestType[]>(`${environment.apiUrl}contest/getAvailable`);
-  }
 
   planContest(newContest: Contest) {
     return this.httpClient.post(`${environment.apiUrl}contest/plan`, newContest);
@@ -37,12 +35,24 @@ export class ContestService {
     return this.httpClient.get<ContestInfo[]>(`${environment.apiUrl}contest/getAvailableByBreed/${breedId}`);
   }
 
+  getAvaiableContestsByDogId (dogId: number) {
+    return this.httpClient.get<ContestInfo[]>(`${environment.apiUrl}contest/getAvailableByDog/${dogId}`);
+  }
+
   getNotPlannedContests () {
     return this.httpClient.get<ContestInfo[]>(`${environment.apiUrl}contest/getNotPlanned`);
   }
 
-  getEntriedContestsByDogId (dogId: number) {
+  participate(participation: Participation) {
+    return this.httpClient.post(`${environment.apiUrl}contest/participate`, participation);
+  }
 
+  deleteParticipation(participationId: number) {
+    return this.httpClient.delete(`${environment.apiUrl}contest/participation/${participationId}`);
+  }
+
+  getEntriedContestsByDogId (dogId: number) {
+    return this.httpClient.get<DogParticipation[]>(`${environment.apiUrl}contest/getDogParticipation/${dogId}`);
   }
 
   getContestById (contestId: number) {
