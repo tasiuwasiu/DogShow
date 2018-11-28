@@ -6,6 +6,7 @@ import {MessageService} from '../../../services/Message/message.service';
 import {DogDetails} from '../../../DTOs/DogDetails.model';
 import {DeleteContestButtonComponent} from '../../contest/contest-list/delete-contest-button.component';
 import {ContestService} from '../../../services/Contest/contest.service';
+import {DeleteParticipationButtonComponent} from './delete-participation-button.component';
 
 @Component({
   selector: 'app-dog-details',
@@ -78,7 +79,7 @@ export class DogDetailsComponent implements OnInit {
           filter: false,
           sort: false,
           width: '15%',
-          renderComponent: DeleteContestButtonComponent,
+          renderComponent: DeleteParticipationButtonComponent,
           onComponentInitFunction: (instance) => {
             instance.deletedItem.subscribe(participationId => {
               this.handleDelete(participationId);

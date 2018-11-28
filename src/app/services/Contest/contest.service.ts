@@ -7,6 +7,7 @@ import {Contest} from '../../models/Contest.model';
 import {ContestInfo} from '../../DTOs/ContestInfo.model';
 import {Participation} from '../../models/Participation.model';
 import {DogParticipation} from '../../DTOs/DogParticipation.model';
+import {ContestDetails} from '../../DTOs/ContestDetails.model';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,6 @@ export class ContestService {
   }
 
   getContestById (contestId: number) {
-
+    return this.httpClient.get<ContestDetails>(`${environment.apiUrl}contest/${contestId}`);
   }
 }

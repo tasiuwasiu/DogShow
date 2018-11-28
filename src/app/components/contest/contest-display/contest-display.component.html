@@ -1,3 +1,42 @@
-<p>
-  contest-display works!
-</p>
+<div class="col-lg-6 title">
+  <h3>Szczegóły konkursu</h3>
+</div>
+
+<div class="align-content-center col-lg-8">
+  <div>
+    <label class="col-lg-2" for="name">Nazwa</label>
+    <span class="col-lg-6" id="name">{{contest.name}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="isEnterable">Czy uczestnicy mogą się zapisać?</label>
+    <span class="col-lg-6" id="isEnterable" *ngIf="contest.isEnterable">Tak</span>
+    <span class="col-lg-6" id="isEnterable" *ngIf="!contest.isEnterable">Nie</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="placeName">Miejsce</label>
+    <span class="col-lg-6" id="placeName">{{placeName}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="startDate">Termin rozpoczęcia</label>
+    <span class="col-lg-6" id="startDate">{{startDate}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-2" for="endDate">Termin zakończenia</label>
+    <span class="col-lg-6" id="endDate">{{endDate}}</span>
+  </div>
+
+  <div>
+    <label class="col-lg-8">Dozwolone rasy:</label>
+    <ul>
+      <li *ngFor="let breed of contest.allowedBreeds">{{breed.name}}</li>
+    </ul>
+  </div>
+
+  <div>
+    <ng2-smart-table [settings]="tableSettings" [source]="participations"></ng2-smart-table>
+  </div>
+</div>
