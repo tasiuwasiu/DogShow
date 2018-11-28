@@ -1,6 +1,24 @@
+<div class="col-lg-6 title">
+  <h3>Lista Twoich psów</h3>
+</div>
 
-  <input #titleInput type="text" required>
-  <button (click)="setTitle(titleInput.value)">Zapisz tytuł</button>
+<div class="align-content-center col-lg-8">
 
-  <input #appStateInput type="number" required>
-  <button (click)="setAppState(appStateInput.value)">Zapisz stan</button>
+  <div class="form-group row form-row">
+    <label for="titleInput" class="col-lg-2">Tytuł aplikacji</label>
+    <input #titleInput id="titleInput" class="col-lg-4" type="text" required>
+    <button (click)="setTitle(titleInput.value)" class="col-lg-2 btn btn-success">Zapisz tytuł</button>
+  </div>
+
+
+  <div class="form-group row form-row">
+    <label for="appStateInput" class="col-lg-2">Stan aplikacji</label>
+    <select #appStateInput id="appStateInput" class="col-lg-4" required>
+      <option value=10>Zapisywanie</option>
+      <option value=20>Ocenianie</option>
+      <option value=30>Zakończenie</option>
+    </select>
+    <button (click)="setAppState(appStateInput.value)" class="col-lg-2 btn btn-success">Zapisz stan</button>
+  </div>
+
+</div>

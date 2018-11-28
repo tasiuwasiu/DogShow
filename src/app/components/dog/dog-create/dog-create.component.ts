@@ -78,7 +78,7 @@ export class DogCreateComponent implements OnInit {
       registrationNumber: [''],
       titles: [''],
       chipNumber: ['', Validators.required],
-      sex: ['', Validators.required],
+      sex: ['M', Validators.required],
       birthday: [new Date(), Validators.required],
       fatherName: ['', Validators.required],
       motherName: ['', Validators.required],

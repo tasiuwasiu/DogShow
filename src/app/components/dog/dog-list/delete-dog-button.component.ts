@@ -4,7 +4,7 @@ import {MessageService} from '../../../services/Message/message.service';
 import {DogService} from '../../../services/Dog/dog.service';
 
 @Component({
-  selector: 'app-delete-place-button-view',
+  selector: 'app-delete-dog-button-view',
   template: `
     <button type="button" class="btn btn-danger text-white" (click)="onClick()">Usuń</button>
   `,

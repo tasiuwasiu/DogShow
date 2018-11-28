@@ -8,6 +8,7 @@ import {BreedSection} from '../../models/BreedSection.model';
 import {DogClass} from '../../models/DogClass.model';
 import {BreedGroupInfo} from '../../DTOs/BreedGroupInfo.model';
 import {DogDetails} from '../../DTOs/DogDetails.model';
+import {DogInfo} from '../../DTOs/DogInfo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class DogService {
   }
 
   getDogsByUserID(userId: number) {
-    return this.httpClient.get<Dog[]>(`${environment.apiUrl}dog/getByUserId/${userId}`);
+    return this.httpClient.get<DogInfo[]>(`${environment.apiUrl}dog/getByUserId/${userId}`);
   }
 
   getBreedsInSection(sectionID: number) {

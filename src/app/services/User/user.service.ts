@@ -19,4 +19,7 @@ export class UserService {
     return this.httpClient.post<any>(`${environment.apiUrl}user/edit/${userID}`, newData);
   }
 
+  registerJudge(newUser: User) {
+    return this.httpClient.post<any>(`${environment.apiUrl}user/addJudge`, newUser);
+  }
 }

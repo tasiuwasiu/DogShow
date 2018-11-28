@@ -5,6 +5,7 @@ import {Title} from '@angular/platform-browser';
 import {DogService} from '../../../services/Dog/dog.service';
 import {EditDogButtonComponent} from './edit-dog-button.component';
 import {DeleteDogButtonComponent} from './delete-dog-button.component';
+import {DetailsDogButtonComponent} from './details-dog-button.component';
 
 @Component({
   selector: 'app-dog-list',
@@ -23,7 +24,7 @@ export class DogListComponent implements OnInit {
               private dogService: DogService) { }
 
   ngOnInit() {
-    this.titleService.setTitle('Lista moich psów');
+    this.titleService.setTitle('Lista psów');
     this.userId = this.authorizationService.getCurrentUserID();
     this.dogService.getDogsByUserID(this.userId).subscribe(
       data => {
@@ -45,16 +46,32 @@ export class DogListComponent implements OnInit {
           title: 'Nazwa',
           editable: false
         },
+        breedName: {
+          title: 'Rasa',
+          editable: false
+        },
+        className: {
+          title: 'Klasa',
+          editable: false
+        },
         chipNumber: {
           title: 'Nr chipu',
           editable: false
+        },
+        details: {
+          title: '',
+          type: 'custom',
+          filter: false,
+          sort: false,
+          width: '10%',
+          renderComponent: DetailsDogButtonComponent
         },
         edit: {
           title: '',
           type: 'custom',
           filter: false,
           sort: false,
-          width: '15%',
+          width: '10%',
           renderComponent: EditDogButtonComponent
         },
         delete: {
@@ -62,7 +79,7 @@ export class DogListComponent implements OnInit {
           type: 'custom',
           filter: false,
           sort: false,
-          width: '15%',
+          width: '10%',
           renderComponent: DeleteDogButtonComponent,
           onComponentInitFunction: (instance) => {
             instance.deletedItem.subscribe(dogId => {

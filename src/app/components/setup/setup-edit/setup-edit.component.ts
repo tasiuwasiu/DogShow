@@ -14,6 +14,7 @@ export class SetupEditComponent implements OnInit {
   constructor(private appSettingsService: AppSettingsService) { }
 
   ngOnInit() {
+    this.appSettingsService.initAllSettings();
     this.title = this.appSettingsService.appTitle;
     this.appState = this.appSettingsService.appState;
   }

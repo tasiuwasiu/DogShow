@@ -16,8 +16,8 @@
         [disabled]="isProcessing"
         [ngModelOptions]="{standalone: true}">
       </ng-multiselect-dropdown>
-      <div *ngIf="isSubmitted && contestTypeError" class="invalid-feedback col-lg-7">
-        <div>Wybierz konkurs</div>
+      <div *ngIf="isSubmitted && contestTypeError" class="invalid-feedback col-lg-7 d-block">
+        <div *ngIf="contestTypeError">Wybierz konkurs</div>
       </div>
     </div>
 
@@ -27,7 +27,7 @@
              [owlDateTimeTrigger]="dtPicker" [owlDateTime]="dtPicker">
       <owl-date-time #dtPicker [pickerType]="'both'" [firstDayOfWeek]="1"></owl-date-time>
 
-      <div *ngIf="isSubmitted && f.startDate.errors" class="invalid-feedback col-lg-7">
+      <div *ngIf="isSubmitted && f.startDate.errors" class="invalid-feedback col-lg-7 d-block">
         <div *ngIf="f.startDate.errors.required">Termin startu jest wymagany</div>
       </div>
     </div>
@@ -38,7 +38,7 @@
              [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
       <owl-date-time #dtPicker2 [pickerType]="'both'" [firstDayOfWeek]="1"></owl-date-time>
 
-      <div *ngIf="isSubmitted && f.endDate.errors" class="invalid-feedback col-lg-7">
+      <div *ngIf="isSubmitted && f.endDate.errors" class="invalid-feedback col-lg-7 d-block">
         <div *ngIf="f.endDate.errors.required">Termin zakończenia jest wymagany</div>
       </div>
     </div>
@@ -55,7 +55,7 @@
         [disabled]="isProcessing"
         [ngModelOptions]="{standalone: true}">
       </ng-multiselect-dropdown>
-      <div *ngIf="isSubmitted && placeError" class="invalid-feedback col-lg-7">
+      <div *ngIf="isSubmitted && placeError" class="invalid-feedback col-lg-7 d-block">
         <div>Wybierz miejsce</div>
       </div>
     </div>

@@ -7,6 +7,7 @@ import {MessageService} from '../../../services/Message/message.service';
 import {ContestService} from '../../../services/Contest/contest.service';
 import {Contest} from '../../../models/Contest.model';
 import {first} from 'rxjs/operators';
+import {Place} from '../../../models/Place.model';
 
 @Component({
   selector: 'app-contest-create',
@@ -40,7 +41,7 @@ export class ContestCreateComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Planowanie konkursu');
-    this.contestService.getAvailableContests().subscribe(
+    this.contestService.getNotPlannedContests().subscribe(
       data => {
         this.contestTypeDropdownList = data;
       },
@@ -73,14 +74,20 @@ export class ContestCreateComponent implements OnInit {
       idField: 'contestTypeId',
       textField: 'name',
       enableCheckAll: false,
-      allowSearchFilter: true
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Szukaj',
+      noDataAvailablePlaceholderText: 'Brak danych',
+      closeDropDownOnSelection: true
     };
     this.placeDropdownSettings = {
       singleSelection: true,
-      idField: 'contestTypeId',
+      idField: 'placeId',
       textField: 'name',
       enableCheckAll: false,
-      allowSearchFilter: true
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Szukaj',
+      noDataAvailablePlaceholderText: 'Brak danych',
+      closeDropDownOnSelection: true
     };
     this.createForm = this.formBuilder.group({
       startDate: ['', Validators.required],
@@ -94,17 +101,17 @@ export class ContestCreateComponent implements OnInit {
 
   onSubmit() {
     this.isSubmitted = true;
+
+    this.contestTypeError = this.contestTypeSelectedItems.length !== 1;
+    this.placeError = this.placeSelectedItems.length !== 1;
     if (this.createForm.invalid) {
       return;
     }
-    this.contestTypeError = this.contestTypeSelectedItems.length !== 1;
-    this.placeError = this.contestTypeSelectedItems.length !== 1;
     if (this.placeError || this.contestTypeError) {
       return;
     }
 
     this.isProcessing = true;
-
     const startDate = this.f.startDate.value;
     const endDate = this.f.endDate.value;
     const offset = (new Date()).getTimezoneOffset() * 60000;
@@ -118,7 +125,7 @@ export class ContestCreateComponent implements OnInit {
       endDate: correctEndDate,
       placeId: this.placeSelectedItems[0].placeId
     };
-    console.log(this.contest);
+
     this.contestService.planContest(this.contest)
       .pipe(first())
       .subscribe(
@@ -139,7 +146,6 @@ export class ContestCreateComponent implements OnInit {
           this.isProcessing = false;
         }
         );
-
   }
 
 }

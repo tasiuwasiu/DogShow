@@ -28,6 +28,7 @@ export class ContestListComponent implements OnInit {
     this.contestService.getContests().subscribe(
       data => {
         this.contests = data;
+        console.log(data);
       },
       error => {
         if (error.error && error.error.message) {

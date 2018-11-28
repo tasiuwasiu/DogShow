@@ -36,7 +36,7 @@ export class DogDetailsComponent implements OnInit {
           this.messageService.addError('Błąd pobierania');
         }
       }
-    )
+    );
   }
 
 }

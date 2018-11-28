@@ -4,12 +4,12 @@ import {Router} from '@angular/router';
 
 
 @Component({
-  selector: 'app-edit-dog-button-view',
+  selector: 'app-details-dog-button-view',
   template: `
-    <button type="button" class="btn btn-warning  text-white" (click)="onClick()">Edytuj</button>
+    <button type="button" class="btn btn-success  text-white" (click)="onClick()">Szczegóły</button>
   `,
 })
-export class EditDogButtonComponent implements ViewCell, OnInit {
+export class DetailsDogButtonComponent implements ViewCell, OnInit {
 
   constructor(private router: Router) {}
 
@@ -22,7 +22,7 @@ export class EditDogButtonComponent implements ViewCell, OnInit {
   }
 
   onClick() {
-    this.router.navigate(['/dog/edit', this.rowData.dogId]);
+    this.router.navigate(['/dog/details', this.rowData.dogId]);
   }
 
 }

@@ -34,7 +34,11 @@ export class ContestService {
   }
 
   getAvaiableContestsByDogBreed (breedId: number) {
+    return this.httpClient.get<ContestInfo[]>(`${environment.apiUrl}contest/getAvailableByBreed/${breedId}`);
+  }
 
+  getNotPlannedContests () {
+    return this.httpClient.get<ContestInfo[]>(`${environment.apiUrl}contest/getNotPlanned`);
   }
 
   getEntriedContestsByDogId (dogId: number) {
