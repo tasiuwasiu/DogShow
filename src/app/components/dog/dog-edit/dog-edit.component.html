@@ -1,138 +1,132 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<div class="col-lg-6 title">
+  <h3>Edycja psa</h3>
+</div>
 
-  <div class="form-group">
-    <div>
-      <label>Group: </label>
-      <select (change)="getSections($event.target.value)">
-        <option value="0"></option>
-        <option *ngFor="let group of groups" value={{group.groupId}}>
-          {{group.namePolish}}
-        </option>
-      </select>
+<div class="align-content-center col-lg-8">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group row form-row">
+      <label class="col-lg-2">Rasa </label>
+      <span class="col-lg-6">{{dogBreed}}</span>
     </div>
 
-    <div>
-      <label>Section: </label>
-      <select (change)="getBreeds($event.target.value)">
-        <option value="0"></option>
-        <option *ngFor="let section of sections" value={{section.sectionId}}>
-          {{section.namePolish}}
-        </option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Breed: </label>
-      <select formControlName="breedId">
-        <option value="0"></option>
-        <option *ngFor="let breed of breeds" [ngValue]="breed.breedId">
-          {{breed.namePolish}}
-        </option>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div>
-      <label>Klasa: </label>
-      <select formControlName="classId">
+    <div class="form-group row form-row">
+      <label class="col-lg-2">Klasa: </label>
+      <select formControlName="classId" class="form-control col-lg-6">
         <option *ngFor="let class of classes" value={{class.classId}}>
           {{class.namePolish}}
         </option>
       </select>
-    </div>
-  </div>
 
-  <div class="form-group">
-    <label for="name">Nazwa</label>
-    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.name.errors }" />
-    <div *ngIf="isSubmitted && f.name.errors" class="invalid-feedback">
-      <div *ngIf="f.name.errors.required">Username is required</div>
+      <div *ngIf="isSubmitted && f.classId.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.classId.errors.required">Klasa psa jest wymagana</div>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="lineageNumber">Lineagenumber</label>
-    <input type="text" formControlName="lineageNumber" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.lineageNumber.errors }" />
-    <div *ngIf="isSubmitted && f.lineageNumber.errors" class="invalid-feedback">
-      <div *ngIf="f.lineageNumber.errors.required">Username is required</div>
+    <div class="form-group row form-row">
+      <label for="name" class="col-lg-2">Nazwa i przydomek hodowlany</label>
+      <input type="text" id="name" formControlName="name" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.name.errors }"/>
+      <div *ngIf="isSubmitted && f.name.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.name.errors.required">Nazwa psa jest wymagana</div>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="registrationNumber">registration</label>
-    <input type="text" formControlName="registrationNumber" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.registrationNumber.errors }" />
-    <div *ngIf="isSubmitted && f.registrationNumber.errors" class="invalid-feedback">
-      <div *ngIf="f.registrationNumber.errors.required">Username is required</div>
+    <div class="form-group row form-row">
+      <label for="lineageNumber" class="col-lg-2">Numer rodowodu</label>
+      <input type="text" formControlName="lineageNumber" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.lineageNumber.errors }"/>
+      <div *ngIf="isSubmitted && f.lineageNumber.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.lineageNumber.errors.required">Username is required</div>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="titles">titles</label>
-    <input type="text" formControlName="titles" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.titles.errors }" />
-    <div *ngIf="isSubmitted && f.titles.errors" class="invalid-feedback">
-      <div *ngIf="f.titles.errors.required">Username is required</div>
+    <div class="form-group row form-row">
+      <label for="registrationNumber" class="col-lg-2">Rejestracja oddziałowa</label>
+      <input type="text" formControlName="registrationNumber" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.registrationNumber.errors }"/>
+      <div *ngIf="isSubmitted && f.registrationNumber.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.registrationNumber.errors.required">Username is required</div>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="chipNumber">chipnumber</label>
-    <input type="text" formControlName="chipNumber" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.chipNumber.errors }" />
-    <div *ngIf="isSubmitted && f.chipNumber.errors" class="invalid-feedback">
-      <div *ngIf="f.chipNumber.errors.required">Username is required</div>
+    <div class="form-group row form-row">
+      <label for="titles" class="col-lg-2">Tytuły</label>
+      <input type="text" formControlName="titles" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.titles.errors }"/>
+      <div *ngIf="isSubmitted && f.titles.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.titles.errors.required">Username is required</div>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div>
-      <label>Płeć: </label>
-      <select formControlName="sex">
+    <div class="form-group row form-row">
+      <label for="chipNumber" class="col-lg-2">Numer chipa/tatuażu</label>
+      <input type="text" formControlName="chipNumber" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.chipNumber.errors }"/>
+      <div *ngIf="isSubmitted && f.chipNumber.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.chipNumber.errors.required">Numer chipa/tatuażu jest wymagany</div>
+      </div>
+    </div>
+
+    <div class="form-group row form-row">
+      <label class="col-lg-2">Płeć: </label>
+      <select formControlName="sex" class="form-control col-lg-6">
         <option value="M">Pies</option>
         <option value="F">Suka</option>
       </select>
+      <div *ngIf="isSubmitted && f.sex.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.sex.errors.required">Płeć jest wymagana</div>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label>Data urodzin:</label>
-    <input formControlName="birthday"
-           [owlDateTimeTrigger]="dtPicker" [owlDateTime]="dtPicker" [max]="today">
-    <owl-date-time #dtPicker [pickerType]="'calendar'"  [firstDayOfWeek]="1"></owl-date-time>
-  </div>
+    <div class="form-group row form-row">
+      <label class="col-lg-2">Data urodzin:</label>
+      <input formControlName="birthday" class="form-control col-lg-6"
+             [owlDateTimeTrigger]="dtPicker" [owlDateTime]="dtPicker" [max]="today">
+      <owl-date-time #dtPicker [pickerType]="'calendar'" [firstDayOfWeek]="1"></owl-date-time>
+      <div *ngIf="isSubmitted && f.birthday.errors" class="invalid-feedback col-lg-8 d-block">
+        <div *ngIf="f.birthday.errors.required">Data urodzin jest wymagana</div>
+        <div *ngIf="f.birthday.errors.owlDateTimeMax">Data urodzin jest późniejsza niż obecna data</div>
+      </div>
+    </div>
 
+    <div class="form-group row form-row">
+      <label for="fatherName" class="col-lg-2">Ojciec</label>
+      <input type="text" formControlName="fatherName" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.fatherName.errors }"/>
+      <div *ngIf="isSubmitted && f.fatherName.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.fatherName.errors.required">Nazwa ojca jest wymagana</div>
+      </div>
+    </div>
+    <div class="form-group row form-row">
+      <label for="motherName" class="col-lg-2">Matka</label>
+      <input type="text" formControlName="motherName" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.motherName.errors }"/>
+      <div *ngIf="isSubmitted && f.motherName.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.motherName.errors.required">Nazwa matki jest wymagana</div>
+      </div>
+    </div>
+    <div class="form-group row form-row">
+      <label for="breederName" class="col-lg-2">Hodowca</label>
+      <input type="text" formControlName="breederName" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.breederName.errors }"/>
+      <div *ngIf="isSubmitted && f.breederName.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.breederName.errors.required">Imię i nazwisko hodowcy jest wymagane</div>
+      </div>
+    </div>
+    <div class="form-group row form-row">
+      <label for="breederAddress" class="col-lg-2">Adres hodowcy</label>
+      <input type="text" formControlName="breederAddress" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.breederAddress.errors }"/>
+      <div *ngIf="isSubmitted && f.breederAddress.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.breederAddress.errors.required">Adres hodowcy jest wymagany</div>
+      </div>
+    </div>
 
-  <div class="form-group">
-    <label for="fatherName">fathet</label>
-    <input type="text" formControlName="fatherName" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.fatherName.errors }" />
-    <div *ngIf="isSubmitted && f.fatherName.errors" class="invalid-feedback">
-      <div *ngIf="f.fatherName.errors.required">Username is required</div>
+    <div class="form-group col-lg-8 form-row-button">
+      <button [disabled]="isProcessing" class="btn btn-primary">Zapisz</button>
+      <img *ngIf="isProcessing"
+           src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="motherName">mother</label>
-    <input type="text" formControlName="motherName" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.motherName.errors }" />
-    <div *ngIf="isSubmitted && f.motherName.errors" class="invalid-feedback">
-      <div *ngIf="f.motherName.errors.required">Username is required</div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="breederName">breeder</label>
-    <input type="text" formControlName="breederName" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.breederName.errors }" />
-    <div *ngIf="isSubmitted && f.breederName.errors" class="invalid-feedback">
-      <div *ngIf="f.breederName.errors.required">Username is required</div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="breederAddress">breederaddress</label>
-    <input type="text" formControlName="breederAddress" class="form-control" [ngClass]="{ 'is-invalid': isSubmitted && f.breederAddress.errors }" />
-    <div *ngIf="isSubmitted && f.breederAddress.errors" class="invalid-feedback">
-      <div *ngIf="f.breederAddress.errors.required">Username is required</div>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <button [disabled]="isProcessing" class="btn btn-primary">Zapisz</button>
-    <img *ngIf="isProcessing"
-         src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-  </div>
-</form>
+  </form>
+</div>

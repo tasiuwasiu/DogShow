@@ -1,3 +1,19 @@
-<p>
-  information-schedule works!
-</p>
+<div class="col-lg-6 title">
+  <h3>Terminarz</h3>
+</div>
+
+
+<div>
+
+  <div *ngFor="let plan of plans" class="info-row">
+    <h5>{{plan.date}}</h5>
+    <ul>
+      <li *ngFor="let contest of plan.contests">
+        <b>{{contest.name}}</b> - {{contest.placeName}} - {{contest.startDate | date:'HH:mm'}} - {{contest.endDate |
+        date:'HH:mm'}}
+
+      </li>
+    </ul>
+
+  </div>
+</div>

@@ -136,10 +136,10 @@ export class DogCreateComponent implements OnInit {
     const correctDate = (new Date(date - offset)).toISOString().slice(0, -1);
 
     this.dog = {
-      dogID: 0,
-      ownerID: this.authorizationService.getCurrentUserID(),
-      breedID: this.f.breedId.value,
-      classID: this.f.classId.value,
+      dogId: 0,
+      ownerId: this.authorizationService.getCurrentUserID(),
+      breedId: this.f.breedId.value,
+      classId: this.f.classId.value,
       name: this.f.name.value,
       lineageNumber: this.f.lineageNumber.value,
       registrationNumber: this.f.registrationNumber.value,

@@ -29,8 +29,12 @@ export class ProfileCreateComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       address: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      repeatPassword: ['', Validators.required]
+    },
+      {
+        validator: this.checkMatchingPasswords('password', 'repeatPassword')
+      });
   }
 
   get f() {
@@ -72,5 +76,17 @@ export class ProfileCreateComponent implements OnInit {
           this.isProcessing = false;
         }
       );
+  }
+
+  private checkMatchingPasswords(password: string, confirmPassword: string) {
+    return (group: FormGroup) => {
+      const passwordInput = group.controls[password],
+        passwordConfirmationInput = group.controls[confirmPassword];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({notSame: true});
+      } else {
+        return passwordConfirmationInput.setErrors(null);
+      }
+    };
   }
 }

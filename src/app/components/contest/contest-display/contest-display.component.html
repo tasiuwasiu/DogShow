@@ -21,12 +21,12 @@
 
   <div>
     <label class="col-lg-2" for="startDate">Termin rozpoczęcia</label>
-    <span class="col-lg-6" id="startDate">{{startDate}}</span>
+    <span class="col-lg-6" id="startDate">{{startDate | date:'d.M.y HH:mm'}}</span>
   </div>
 
   <div>
     <label class="col-lg-2" for="endDate">Termin zakończenia</label>
-    <span class="col-lg-6" id="endDate">{{endDate}}</span>
+    <span class="col-lg-6" id="endDate">{{endDate | date:'d.M.y HH:mm'}}</span>
   </div>
 
   <div>

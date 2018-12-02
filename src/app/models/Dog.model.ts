@@ -1,8 +1,8 @@
 export interface Dog {
-  dogID: number;
-  ownerID: number;
-  breedID: number;
-  classID: number;
+  dogId: number;
+  ownerId: number;
+  breedId: number;
+  classId: number;
   name: string;
   lineageNumber: string;
   registrationNumber: string;

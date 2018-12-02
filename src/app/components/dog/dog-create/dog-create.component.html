@@ -64,7 +64,7 @@
       <input type="text" formControlName="lineageNumber" class="form-control col-lg-6"
              [ngClass]="{ 'is-invalid': isSubmitted && f.lineageNumber.errors }"/>
       <div *ngIf="isSubmitted && f.lineageNumber.errors" class="invalid-feedback col-lg-8">
-        <div *ngIf="f.lineageNumber.errors.required">Username is required</div>
+        <div *ngIf="f.lineageNumber.errors.required">Numer rodowodu jest wymagany</div>
       </div>
     </div>
 
@@ -73,7 +73,7 @@
       <input type="text" formControlName="registrationNumber" class="form-control col-lg-6"
              [ngClass]="{ 'is-invalid': isSubmitted && f.registrationNumber.errors }"/>
       <div *ngIf="isSubmitted && f.registrationNumber.errors" class="invalid-feedback col-lg-8">
-        <div *ngIf="f.registrationNumber.errors.required">Username is required</div>
+        <div *ngIf="f.registrationNumber.errors.required">Nr rejestracji jest wymagany</div>
       </div>
     </div>
 
@@ -82,7 +82,7 @@
       <input type="text" formControlName="titles" class="form-control col-lg-6"
              [ngClass]="{ 'is-invalid': isSubmitted && f.titles.errors }"/>
       <div *ngIf="isSubmitted && f.titles.errors" class="invalid-feedback col-lg-8">
-        <div *ngIf="f.titles.errors.required">Username is required</div>
+        <div *ngIf="f.titles.errors.required">Tytuły są wymagane</div>
       </div>
     </div>
 
@@ -111,8 +111,9 @@
       <input formControlName="birthday" class="form-control col-lg-6"
              [owlDateTimeTrigger]="dtPicker" [owlDateTime]="dtPicker" [max]="today">
       <owl-date-time #dtPicker [pickerType]="'calendar'" [firstDayOfWeek]="1"></owl-date-time>
-      <div *ngIf="isSubmitted && f.birthday.errors" class="invalid-feedback col-lg-8">
+      <div *ngIf="isSubmitted && f.birthday.errors" class="invalid-feedback col-lg-8 d-block">
         <div *ngIf="f.birthday.errors.required">Data urodzin jest wymagana</div>
+        <div *ngIf="f.birthday.errors.owlDateTimeMax">Data urodzin jest późniejsza niż obecna data</div>
       </div>
     </div>
 

@@ -4,12 +4,12 @@ import {Router} from '@angular/router';
 import {AuthorizationService} from '../../../services/Authorization/authorization.service';
 
 @Component({
-  selector: 'app-edit-contest-button-view',
+  selector: 'app-grade-contest-button-view',
   template: `
-    <button *ngIf="isVisible" type="button" class="btn btn-warning  text-white" (click)="onClick()">Edytuj</button>
+    <button *ngIf="isVisible" type="button" class="btn btn-primary  text-white" (click)="onClick()">Oceń</button>
   `,
 })
-export class EditContestButtonComponent implements ViewCell, OnInit {
+export class GradeContestButtonComponent implements ViewCell, OnInit {
 
   constructor(private router: Router,
               private authorizationService: AuthorizationService) {}
@@ -21,11 +21,11 @@ export class EditContestButtonComponent implements ViewCell, OnInit {
   @Output() save: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
-    this.isVisible = this.authorizationService.hasPermission('2');
+    this.isVisible = this.authorizationService.hasPermission('3');
   }
 
   onClick() {
-    this.router.navigate(['/contest/edit', this.rowData.contestTypeId]);
+    this.router.navigate(['/contest/grade', this.rowData.contestTypeId]);
   }
 
 }

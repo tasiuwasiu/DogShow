@@ -27,10 +27,15 @@ export class ProfileEditComponent implements OnInit {
   ngOnInit() {
     this.user = this.authorizationService.getCurrentUser();
     this.editForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      address: ['', Validators.required]
-    });
+      firstName: [this.user.firstName, Validators.required],
+      lastName: [this.user.lastName, Validators.required],
+      address: [this.user.address, Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      repeatPassword: ['', Validators.required]
+    },
+      {
+        validator: this.checkMatchingPasswords('password', 'repeatPassword')
+      });
     this.isProcessing = false;
   }
 
@@ -68,4 +73,15 @@ export class ProfileEditComponent implements OnInit {
         });
   }
 
+  private checkMatchingPasswords(password: string, confirmPassword: string) {
+    return (group: FormGroup) => {
+      const passwordInput = group.controls[password],
+        passwordConfirmationInput = group.controls[confirmPassword];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({notSame: true});
+      } else {
+        return passwordConfirmationInput.setErrors(null);
+      }
+    };
+  }
 }

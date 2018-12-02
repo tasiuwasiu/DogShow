@@ -6,6 +6,8 @@ import {ContestService} from '../../../services/Contest/contest.service';
 import {EditContestButtonComponent} from './edit-contest-button.component';
 import {DeleteContestButtonComponent} from './delete-contest-button.component';
 import {DetailsContestButtonComponent} from './details-contest-button.component';
+import {GradeContestButtonComponent} from './grade-contest-button.component';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-contest-list',
@@ -65,7 +67,7 @@ export class ContestListComponent implements OnInit {
             if (row.contestId === -1) {
               return 'Nie zaplanowano';
             } else {
-              return value;
+              return formatDate(value, 'd.M.y HH:mm', 'en-US');
             }
           }
         },
@@ -76,7 +78,7 @@ export class ContestListComponent implements OnInit {
             if (row.contestId === -1) {
               return 'Nie zaplanowano';
             } else {
-              return value;
+              return formatDate(value, 'd.M.y HH:mm', 'en-US');
             }
           }
         },
@@ -85,7 +87,7 @@ export class ContestListComponent implements OnInit {
           type: 'custom',
           filter: false,
           sort: false,
-          width: '10%',
+          width: '7%',
           renderComponent: DetailsContestButtonComponent
         },
         edit: {
@@ -93,15 +95,23 @@ export class ContestListComponent implements OnInit {
           type: 'custom',
           filter: false,
           sort: false,
-          width: '10%',
+          width: '7%',
           renderComponent: EditContestButtonComponent
+        },
+        grade: {
+          title: '',
+          type: 'custom',
+          filter: false,
+          sort: false,
+          width: '7%',
+          renderComponent: GradeContestButtonComponent
         },
         delete: {
           title: '',
           type: 'custom',
           filter: false,
           sort: false,
-          width: '10%',
+          width: '7%',
           renderComponent: DeleteContestButtonComponent,
           onComponentInitFunction: (instance) => {
             instance.deletedItem.subscribe(contestTypeId => {

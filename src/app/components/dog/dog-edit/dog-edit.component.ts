@@ -21,10 +21,8 @@ export class DogEditComponent implements OnInit {
   registerForm: FormGroup;
   isProcessing = false;
   isSubmitted = false;
-  groups: BreedGroup[];
-  sections: BreedSection[];
-  breeds: DogBreed[];
   classes: DogClass[];
+  dogBreed: string;
   dog: Dog;
 
   today = new Date();
@@ -40,25 +38,11 @@ export class DogEditComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Edycja psa');
     this.isProcessing = true;
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.dogService.getAllGroups().subscribe(
-      data => {
-        this.groups = data;
-      },
-      error => {
-        if (error.error && error.error.message) {
-          this.messageService.addError(error.error.message);
-        } else if (error.status !== null && error.status === 0) {
-          this.messageService.addError('Brak połączenia z serwerem API!');
-        } else {
-          this.messageService.addError('Błąd pobierania');
-        }
-      }
-    );
 
     this.dogService.getClasses().subscribe(
       data => {
         this.classes = data;
+        this.downloadDog();
       },
       error => {
         if (error.error && error.error.message) {
@@ -71,17 +55,32 @@ export class DogEditComponent implements OnInit {
       }
     );
 
+    this.registerForm = this.formBuilder.group({
+      classId: ['', Validators.required],
+      name: ['', Validators.required],
+      lineageNumber: [''],
+      registrationNumber: [''],
+      titles: [''],
+      chipNumber: ['', Validators.required],
+      sex: ['', Validators.required],
+      birthday: ['', Validators.required],
+      fatherName: ['', Validators.required],
+      motherName: ['', Validators.required],
+      breederName: ['', Validators.required],
+      breederAddress: ['', Validators.required]
+    });
+  }
+
+  private downloadDog() {
+    const id = +this.route.snapshot.paramMap.get('id');
     this.dogService.getDogByID(id).subscribe(
       data => {
         this.dog = data;
-        const offset = (new Date()).getTimezoneOffset() * 60000;
-        this.dog.birthday = (new Date(this.dog.birthday + offset)).toISOString().slice(0, -1);
-        this.dogService.getGroupSectionFromBreed(this.dog.breedID).subscribe(
+        console.log(this.dog);
+        this.setValues();
+        this.dogService.getBreedById(this.dog.breedId).subscribe(
           dataB => {
-            // setgroup
-            this.getSections(dataB.groupId);
-            // setsection
-
+            this.dogBreed = dataB.namePolish;
             this.isProcessing = false;
           },
           error => {
@@ -105,58 +104,6 @@ export class DogEditComponent implements OnInit {
         }
       }
     );
-
-    this.registerForm = this.formBuilder.group({
-      breedId: [this.dog.breedID, Validators.required],
-      classId: [this.dog.classID, Validators.required],
-      name: [this.dog.name, Validators.required],
-      lineageNumber: [this.dog.lineageNumber],
-      registrationNumber: [this.dog.registrationNumber],
-      titles: [this.dog.titles],
-      chipNumber: [this.dog.chipNumber, Validators.required],
-      sex: [this.dog.sex, Validators.required],
-      birthday: [this.dog.birthday, Validators.required],
-      fatherName: [this.dog.fatherName, Validators.required],
-      motherName: [this.dog.motherName, Validators.required],
-      breederName: [this.dog.breederName, Validators.required],
-      breederAddress: [this.dog.breederAddress, Validators.required]
-    });
-
-
-  }
-
-  getSections(groupID: number) {
-    this.dogService.getSectionsInGroup(groupID).subscribe(
-      data => {
-        this.sections = data;
-      },
-      error => {
-        if (error.error && error.error.message) {
-          this.messageService.addError(error.error.message);
-        } else if (error.status !== null && error.status === 0) {
-          this.messageService.addError('Brak połączenia z serwerem API!');
-        } else {
-          this.messageService.addError('Błąd pobierania');
-        }
-      }
-    );
-  }
-
-  getBreeds(sectionID: number) {
-    this.dogService.getBreedsInSection(sectionID).subscribe(
-      data => {
-        this.breeds = data;
-      },
-      error => {
-        if (error.error && error.error.message) {
-          this.messageService.addError(error.error.message);
-        } else if (error.status !== null && error.status === 0) {
-          this.messageService.addError('Brak połączenia z serwerem API!');
-        } else {
-          this.messageService.addError('Błąd pobierania');
-        }
-      }
-    );
   }
 
   get f() {
@@ -164,8 +111,8 @@ export class DogEditComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.isSubmitted = true;
+    console.log(this.registerForm);
     if (this.registerForm.invalid) {
       return;
     }
@@ -174,10 +121,10 @@ export class DogEditComponent implements OnInit {
     const correctDate = (new Date(date - offset)).toISOString().slice(0, -1);
 
     this.dog = {
-      dogID: this.dog.dogID,
-      ownerID: this.dog.ownerID,
-      breedID: this.f.breedId.value,
-      classID: this.f.classId.value,
+      dogId: this.dog.dogId,
+      ownerId: this.dog.ownerId,
+      breedId: this.dog.breedId,
+      classId: this.f.classId.value,
       name: this.f.name.value,
       lineageNumber: this.f.lineageNumber.value,
       registrationNumber: this.f.registrationNumber.value,
@@ -191,10 +138,10 @@ export class DogEditComponent implements OnInit {
       breederAddress: this.f.breederAddress.value
     };
 
-    console.log (this.dog);
+    console.log(this.dog);
 
     this.isProcessing = true;
-    this.dogService.editDog(this.dog.dogID,this.dog)
+    this.dogService.editDog(this.dog.dogId, this.dog)
       .pipe(first())
       .subscribe(
         data => {
@@ -215,5 +162,20 @@ export class DogEditComponent implements OnInit {
         }
       );
 
+  }
+
+  private setValues() {
+    this.f.classId.setValue(this.dog.classId);
+    this.f.name.setValue(this.dog.name);
+    this.f.lineageNumber.setValue(this.dog.lineageNumber);
+    this.f.registrationNumber.setValue(this.dog.registrationNumber);
+    this.f.titles.setValue(this.dog.titles);
+    this.f.chipNumber.setValue(this.dog.chipNumber);
+    this.f.sex.setValue(this.dog.sex);
+    this.f.birthday.setValue(this.dog.birthday);
+    this.f.fatherName.setValue(this.dog.fatherName);
+    this.f.motherName.setValue(this.dog.motherName);
+    this.f.breederName.setValue(this.dog.breederName);
+    this.f.breederAddress.setValue(this.dog.breederAddress);
   }
 }

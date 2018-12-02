@@ -51,12 +51,12 @@
     </div>
 
     <div class="form-group row form-row">
-      <label for="passwordR" class="col-lg-2">Powtórz hasło</label>
-      <input type="password" id="passwordR" formControlName="passwordR" class="form-control col-lg-6"
-             [ngClass]="{ 'is-invalid': isSubmitted && f.password.errors }"/>
-      <div *ngIf="isSubmitted && f.password.errors" class="invalid-feedback col-lg-8">
-        <div *ngIf="f.password.errors.required">Hasło jest wymagane</div>
-        <div *ngIf="f.password.errors.minlength">Hasło musi mieć przynajmniej 6 znaków</div>
+      <label for="repeatPassword" class="col-lg-2">Powtórz hasło</label>
+      <input type="repeatPassword" id="repeatPassword" formControlName="repeatPassword" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.repeatPassword.errors }"/>
+      <div *ngIf="isSubmitted && f.repeatPassword.errors" class="invalid-feedback col-lg-8">
+        <div *ngIf="f.repeatPassword.errors.required">Wprowadź ponownie hasło</div>
+        <div *ngIf="f.repeatPassword.errors.notSame">Hasła muszą się zgadzać</div>
       </div>
     </div>
 

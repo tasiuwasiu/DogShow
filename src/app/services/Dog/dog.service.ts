@@ -61,4 +61,8 @@ export class DogService {
   deleteDog(dogId: number) {
     return this.httpClient.delete(`${environment.apiUrl}dog/${dogId}`);
   }
+
+  getBreedById(breedId: number) {
+    return this.httpClient.get<DogBreed>(`${environment.apiUrl}dog/getBreed/${breedId}`);
+  }
 }
