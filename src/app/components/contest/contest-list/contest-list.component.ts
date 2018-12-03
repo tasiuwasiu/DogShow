@@ -98,14 +98,6 @@ export class ContestListComponent implements OnInit {
           width: '7%',
           renderComponent: EditContestButtonComponent
         },
-        grade: {
-          title: '',
-          type: 'custom',
-          filter: false,
-          sort: false,
-          width: '7%',
-          renderComponent: GradeContestButtonComponent
-        },
         delete: {
           title: '',
           type: 'custom',
@@ -118,6 +110,14 @@ export class ContestListComponent implements OnInit {
               this.handleDelete(contestTypeId);
             });
           }
+        },
+        grade: {
+          title: '',
+          type: 'custom',
+          filter: false,
+          sort: false,
+          width: '7%',
+          renderComponent: GradeContestButtonComponent
         }
       },
       actions: {

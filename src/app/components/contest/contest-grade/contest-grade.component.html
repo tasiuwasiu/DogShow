@@ -1,3 +1,9 @@
-<p>
-  contest-grade works!
-</p>
+<div class="col-lg-6 title">
+  <h3>Ocenianie konkursu - {{contest.name}}</h3>
+</div>
+
+<div class="align-content-center">
+  <div>
+    <ng2-smart-table [settings]="tableSettings" [source]="participations"></ng2-smart-table>
+  </div>
+</div>

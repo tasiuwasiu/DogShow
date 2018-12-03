@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ViewCell} from 'ng2-smart-table';
 import {Router} from '@angular/router';
 import {AuthorizationService} from '../../../services/Authorization/authorization.service';
+import {AppSettingsService} from '../../../services/AppSettings/appsettings.service';
+import {AppStates} from '../../../helpers/AppStates.enum';
 
 @Component({
   selector: 'app-grade-contest-button-view',
@@ -12,7 +14,8 @@ import {AuthorizationService} from '../../../services/Authorization/authorizatio
 export class GradeContestButtonComponent implements ViewCell, OnInit {
 
   constructor(private router: Router,
-              private authorizationService: AuthorizationService) {}
+              private authorizationService: AuthorizationService,
+              private appSettingsService: AppSettingsService) {}
 
   @Input() value: string | number;
   @Input() rowData: any;
@@ -21,7 +24,7 @@ export class GradeContestButtonComponent implements ViewCell, OnInit {
   @Output() save: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
-    this.isVisible = this.authorizationService.hasPermission('3');
+    this.isVisible = this.authorizationService.hasPermission('3') && this.appSettingsService.appState === AppStates.canGrade;
   }
 
   onClick() {

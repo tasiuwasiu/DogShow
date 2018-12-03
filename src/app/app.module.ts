@@ -48,6 +48,7 @@ import {DetailsDogButtonComponent} from './components/dog/dog-list/details-dog-b
 import {DetailsContestButtonComponent} from './components/contest/contest-list/details-contest-button.component';
 import {DeleteParticipationButtonComponent} from './components/dog/dog-details/delete-participation-button.component';
 import {GradeContestButtonComponent} from './components/contest/contest-list/grade-contest-button.component';
+import {GradeTableComponent} from './components/contest/contest-grade/grade-table.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import {GradeContestButtonComponent} from './components/contest/contest-list/gra
     DetailsDogButtonComponent,
     DetailsContestButtonComponent,
     DeleteParticipationButtonComponent,
-    GradeContestButtonComponent
+    GradeContestButtonComponent,
+    GradeTableComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +114,8 @@ import {GradeContestButtonComponent} from './components/contest/contest-list/gra
     DetailsDogButtonComponent,
     DetailsContestButtonComponent,
     DeleteParticipationButtonComponent,
-    GradeContestButtonComponent
+    GradeContestButtonComponent,
+    GradeTableComponent
   ],
   providers: [
     Title,
