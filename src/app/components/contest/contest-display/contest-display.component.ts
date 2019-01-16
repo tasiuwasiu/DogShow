@@ -68,6 +68,11 @@ export class ContestDisplayComponent implements OnInit {
           title: 'Ocena',
           editable: false
         },
+        description: {
+          title: 'Uzasadnienie',
+          width: '20%',
+          editable: false
+        },
         place: {
           title: 'Miejsce',
           editable: false

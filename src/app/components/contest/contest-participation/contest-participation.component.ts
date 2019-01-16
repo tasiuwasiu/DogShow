@@ -118,7 +118,8 @@ export class ContestParticipationComponent implements OnInit {
     this.participation = {
       participationId: 0,
       dogId: this.dogSelectedItems[0].dogId,
-      contestId: this.contestSelectedItems[0].contestTypeId
+      contestId: this.contestSelectedItems[0].contestTypeId,
+      description: ''
     };
 
     this.contestService.participate(this.participation)
@@ -131,6 +132,7 @@ export class ContestParticipationComponent implements OnInit {
           });
         },
         error => {
+          this.messageService.removeMessages();
           if (error.error && error.error.message) {
             this.messageService.addError(error.error.message);
           } else if (error.status !== null && error.status === 0) {

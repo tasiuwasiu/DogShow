@@ -4,6 +4,7 @@ import {MessageService} from '../../../services/Message/message.service';
 import {Place} from '../../../models/Place.model';
 import {EditPlaceButtonComponent} from './edit-place-button.component';
 import {DeletePlaceButtonComponent} from './delete-place-button.component';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-place-list',
@@ -15,10 +16,12 @@ export class PlaceListComponent implements OnInit {
   places: Place[];
   tableSettings = {};
 
-  constructor(private placeService: PlaceService,
+  constructor(private titleService: Title,
+              private placeService: PlaceService,
               private messageService: MessageService) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Lista ringów');
     this.placeService.getAllPlaces().subscribe(
       data => {
         this.places = data;

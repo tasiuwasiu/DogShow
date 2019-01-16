@@ -5,6 +5,7 @@ import {MessageService} from '../../../services/Message/message.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-place-edit',
@@ -18,7 +19,8 @@ export class PlaceEditComponent implements OnInit {
   isSubmitted = false;
   place: Place;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private titleService: Title,
+              private formBuilder: FormBuilder,
               private placeService: PlaceService,
               private messageService: MessageService,
               private route: ActivatedRoute,
@@ -26,6 +28,7 @@ export class PlaceEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Edycja ringu');
     const id = +this.route.snapshot.paramMap.get('id');
     this.placeService.getPlace(id).subscribe(
       data => {

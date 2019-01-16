@@ -5,6 +5,8 @@ export interface ParticipationInfo {
   breedName: string;
   className: string;
   chipNumber: string;
+  gradeId: number;
   grade: string;
   place: string;
+  description: string;
 }

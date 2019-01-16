@@ -4,4 +4,5 @@ export interface DogParticipation {
   contestName: string;
   grade: string;
   place: string;
+  description: string;
 }

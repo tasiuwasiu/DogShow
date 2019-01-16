@@ -25,7 +25,7 @@ import {SetupJudgeComponent} from './components/setup/setup-judge/setup-judge.co
 
 
 const routes: Routes = [
-  {path: '', component: InformationScheduleComponent},
+  {path: '', component: ContestListComponent},
   // information
   {path: 'schedule', component: InformationScheduleComponent},
   {path: 'results', component: InformationWinnersComponent},

@@ -14,15 +14,31 @@ import {DogService} from '../../../services/Dog/dog.service';
   template: `
     <form [formGroup]="gradeForm" (ngSubmit)="onClick()">
 
+      <!--<div class="form-group row form-row">
+        <label class="col-lg-3">Ocena</label>
+        <select id="gradeId" formControlName="gradeId" class="col-lg-9">
+          <option value=""></option>
+          <option *ngFor="let grade of value" [value]="grade.gradeId" >
+          {{grade.namePolish}}
+          </option>
+        </select>
+        <div *ngIf="isSubmitted && f.gradeId.errors" class="invalid-feedback col-lg-7 d-block">
+          <div>Wybierz ocenę</div>
+        </div>
+      </div>-->
+
       <div class="form-group row form-row">
         <label class="col-lg-3">Ocena</label>
-      <select id="gradeId" formControlName="gradeId" class="col-lg-9">
-        <option value=""></option>
-        <option *ngFor="let grade of value" value={{grade.gradeId}}>
-        {{grade.namePolish}}
-        </option>
-      </select>
-        <div *ngIf="isSubmitted && f.grade.errors" class="invalid-feedback col-lg-7 d-block">
+        <select id="gradeId" formControlName="gradeId" class="col-lg-9">
+          <option value=""></option>
+          <option value="1">Doskonała</option>
+          <option value="2">Bardzo dobra</option>
+          <option value="3">Dobra</option>
+          <option value="4">Dostateczna</option>
+          <option value="5">Dyskwalifikująca</option>
+          <option value="6">Nie do oceny</option>
+        </select>
+        <div *ngIf="isSubmitted && f.gradeId.errors" class="invalid-feedback col-lg-7 d-block">
           <div>Wybierz ocenę</div>
         </div>
       </div>
@@ -43,22 +59,31 @@ import {DogService} from '../../../services/Dog/dog.service';
       <div class="form-group row form-row">
         <label class="col-lg-3">Miejsce</label>
         <select id="place" formControlName="place" class="col-lg-9">
-          <option value=""></option>
+          <option value="-1"></option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
         </select>
       </div>
-      <button type="button" class="btn btn-success  text-white" disabled="isProcessing">Zapisz</button>
+
+      <div class="form-group row form-row">
+        <label class="col-lg-3">Uzasadnienie</label>
+        <textarea class="col-lg-9" formControlName="description"></textarea>
+        <div *ngIf="isSubmitted && f.description.errors" class="invalid-feedback col-lg-7 d-block">
+          <div>Wprowadź uzasadnienie</div>
+        </div>
+      </div>
+      
+      <button type="button" class="btn btn-success  text-white" [disabled]="isProcessing" (click)="onClick()">Zapisz</button>
 
     </form>
   `,
 })
 export class GradeTableComponent implements OnInit {
 
-  isSubmitted: boolean;
-  isProcessing: boolean;
+  isSubmitted = false;
+  isProcessing = false;
   gradeForm: FormGroup;
 
   constructor(private messageService: MessageService,
@@ -74,9 +99,10 @@ export class GradeTableComponent implements OnInit {
   ngOnInit() {
 
     this.gradeForm = this.formBuilder.group({
-      gradeId: [this.rowData.gradeId, Validators.required],
+      gradeId: [this.rowData.gradeId === 0 ? null : this.rowData.gradeId, Validators.required],
       isFinalist: [this.rowData.place !== 'Nie przyznano', Validators.required],
-      place: [this.rowData.place]
+      place: [this.rowData.place],
+      description: [this.rowData.description, Validators.required]
     });
   }
 
@@ -86,12 +112,27 @@ export class GradeTableComponent implements OnInit {
       return true;
     }
     this.isProcessing = true;
-    const grade: SaveGrade = {
-      participationId: this.rowData.participationId,
-      gradeId: this.f.gradeId.value,
-      isFinalist: this.f.isFinalist.value,
-      place: this.f.place.value
-    };
+
+    let grade: SaveGrade;
+
+    if (this.f.isFinalist.value) {
+      grade = {
+        participationId: this.rowData.participationId,
+        gradeId: this.f.gradeId.value,
+        isFinalist: true,
+        place: this.f.place.value,
+        description: this.f.description.value
+      };
+    } else {
+      grade = {
+        participationId: this.rowData.participationId,
+        gradeId: this.f.gradeId.value,
+        isFinalist: false,
+        place: -1,
+        description: this.f.description.value
+      };
+    }
+
 
     this.contestService.saveGrade(grade).subscribe(
       data => {

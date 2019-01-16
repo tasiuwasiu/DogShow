@@ -83,7 +83,7 @@ export class ContestGradeComponent implements OnInit {
           type: 'custom',
           filter: false,
           sort: false,
-          width: '30%',
+          width: '40%',
           valuePrepareFunction: (cell, row) => this.grades,
           renderComponent: GradeTableComponent
         }

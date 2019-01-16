@@ -6,6 +6,7 @@ import {DogService} from '../../../services/Dog/dog.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {ContestType} from '../../../models/ContestType.model';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contest-type-create',
@@ -35,7 +36,8 @@ export class ContestTypeCreateComponent implements OnInit {
   isSubmitted = false;
   breedError = false;
 
-  constructor(private router: Router,
+  constructor(private titleService: Title,
+              private router: Router,
               private messageService: MessageService,
               private contestService: ContestService,
               private dogService: DogService,
@@ -43,6 +45,7 @@ export class ContestTypeCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Tworzenie konkursu');
     // init group dropdown
     this.dogService.getAllGroups()
       .pipe(first())

@@ -1,11 +1,11 @@
 <div class="col-lg-6 title">
-  <h3>Dodawanie miejsca</h3>
+  <h3>Dodawanie ringu</h3>
 </div>
 
 <div class="align-content-center col-lg-8">
   <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
     <div class="form-group row form-row">
-      <label for="placeName" class="col-lg-2">Nazwa miejsca: </label>
+      <label for="placeName" class="col-lg-2">Nazwa ringu: </label>
       <input type="text" id="placeName" formControlName="placeName" class="form-control col-lg-6"
              [ngClass]="{ 'is-invalid': isSubmitted && f.placeName.errors }"/>
       <div *ngIf="isSubmitted && f.placeName.errors" class="invalid-feedback col-lg-8">

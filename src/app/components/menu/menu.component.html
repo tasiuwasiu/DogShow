@@ -7,7 +7,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
+        <!--<li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white" href="#" id="infoDropdown" role="button" data-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false">
             Informacje
@@ -15,7 +15,7 @@
           <div class="dropdown-menu" aria-labelledby="infoDropdown">
             <a href="schedule" class="dropdown-item">Terminarz</a>
           </div>
-        </li>
+        </li>-->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white" href="#" id="contestDropdown" role="button"
              data-toggle="dropdown"
@@ -32,11 +32,11 @@
           <a class="nav-link dropdown-toggle text-white" href="#" id="placeDropdown" role="button"
              data-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false">
-            Miejsca
+            Ringi
           </a>
           <div class="dropdown-menu" aria-labelledby="placeDropdown">
-            <a href="place/create" class="dropdown-item">Dodaj miejsce</a>
-            <a href="place" class="dropdown-item">Lista miejsc</a>
+            <a href="place/create" class="dropdown-item">Dodaj ring</a>
+            <a href="place" class="dropdown-item">Lista ringów</a>
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="isLogged">
@@ -51,13 +51,21 @@
           </div>
         </li>
         <li class="nav-item dropdown" *ngIf="isOrganizator">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="judgeDropdown" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Sędziowie
+          </a>
+          <div class="dropdown-menu" aria-labelledby="judgeDropdown">
+            <a href="settings/addJudge" class="dropdown-item">Dodaj sędziego</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isOrganizator">
           <a class="nav-link dropdown-toggle text-white" href="#" id="settingsDropdown" role="button" data-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false">
             Ustawienia
           </a>
           <div class="dropdown-menu" aria-labelledby="settingsDropdown">
             <a href="settings" class="dropdown-item">Edycja ustawień</a>
-            <a href="settings/addJudge" class="dropdown-item">Dodaj sędziego</a>
           </div>
         </li>
         <li class="nav-item dropdown">

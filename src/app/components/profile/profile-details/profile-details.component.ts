@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthorizationService} from '../../../services/Authorization/authorization.service';
 import {User} from '../../../models/User.model';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile-details',
@@ -11,10 +12,12 @@ export class ProfileDetailsComponent implements OnInit {
 
   user: User;
 
-  constructor(private authorizationService: AuthorizationService) {
+  constructor(private titleService: Title,
+              private authorizationService: AuthorizationService) {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Szczegóły profilu');
     this.user = this.authorizationService.getCurrentUser();
   }
 

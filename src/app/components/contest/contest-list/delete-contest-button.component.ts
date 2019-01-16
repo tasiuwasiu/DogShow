@@ -3,6 +3,8 @@ import {ViewCell} from 'ng2-smart-table';
 import {MessageService} from '../../../services/Message/message.service';
 import {ContestService} from '../../../services/Contest/contest.service';
 import {AuthorizationService} from '../../../services/Authorization/authorization.service';
+import {AppStates} from '../../../helpers/AppStates.enum';
+import {AppSettingsService} from '../../../services/AppSettings/appsettings.service';
 
 @Component({
   selector: 'app-delete-place-button-view',
@@ -14,7 +16,8 @@ export class DeleteContestButtonComponent implements ViewCell, OnInit {
 
   constructor(private messageService: MessageService,
               private contestService: ContestService,
-              private authorizationService: AuthorizationService) {  }
+              private authorizationService: AuthorizationService,
+              private appSettingsService: AppSettingsService) {  }
 
   @Input() value: string | number;
   @Input() rowData: any;
@@ -23,7 +26,7 @@ export class DeleteContestButtonComponent implements ViewCell, OnInit {
   @Output() deletedItem: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
-    this.isVisible = this.authorizationService.hasPermission('2');
+    this.isVisible = this.authorizationService.hasPermission('2') && this.appSettingsService.appState === AppStates.canEnter;
   }
 
   onClick() {

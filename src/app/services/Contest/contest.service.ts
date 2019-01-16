@@ -73,4 +73,8 @@ export class ContestService {
   saveGrade(grade: SaveGrade) {
     return this.httpClient.post(`${environment.apiUrl}contest/saveGrade/${grade.participationId}`, grade);
   }
+
+  editContest(contestId: number, newContest: ContestDetails) {
+    return this.httpClient.post(`${environment.apiUrl}contest/edit/${contestId}`, newContest);
+  }
 }

@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/User.model';
 import {UserService} from '../../../services/User/user.service';
 import {first} from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile-edit',
@@ -18,13 +19,15 @@ export class ProfileEditComponent implements OnInit {
   isSubmitted = false;
   user: User;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private titleService: Title,
+              private formBuilder: FormBuilder,
               private authorizationService: AuthorizationService,
               private messageService: MessageService,
               private userService: UserService) {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Edycja profilu');
     this.user = this.authorizationService.getCurrentUser();
     this.editForm = this.formBuilder.group({
       firstName: [this.user.firstName, Validators.required],

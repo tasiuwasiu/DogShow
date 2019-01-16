@@ -50,7 +50,7 @@ export class ContestListComponent implements OnInit {
           editable: false
         },
         placeName: {
-          title: 'Miejsce',
+          title: 'Ring',
           editable: false,
           valuePrepareFunction: (value, row) => {
             if (row.contestId === -1) {

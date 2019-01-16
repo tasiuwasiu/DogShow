@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AppSettingsService} from '../../../services/AppSettings/appsettings.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-setup-edit',
@@ -11,9 +12,11 @@ export class SetupEditComponent implements OnInit {
   title: string;
   appState: number;
 
-  constructor(private appSettingsService: AppSettingsService) { }
+  constructor(private titleService: Title,
+              private appSettingsService: AppSettingsService) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Edycja ustawień');
     this.appSettingsService.initAllSettings();
     this.title = this.appSettingsService.appTitle;
     this.appState = this.appSettingsService.appState;

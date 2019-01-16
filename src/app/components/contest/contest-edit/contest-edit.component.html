@@ -1,3 +1,78 @@
-<p>
-  contest-edit works!
-</p>
+<div class="col-lg-6 title">
+  <h3>Edycja konkursu</h3>
+</div>
+
+<div class="align-content-center col-lg-7">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group row form-row">
+      <label for="name" class="col-lg-3">Nazwa</label>
+      <input type="text" id="name" formControlName="name" class="form-control col-lg-6"
+             [ngClass]="{ 'is-invalid': isSubmitted && f.name.errors }"/>
+      <div *ngIf="isSubmitted && f.name.errors" class="invalid-feedback col-lg-7">
+        <div *ngIf="f.name.errors.required">Nazwa jest wymagana</div>
+      </div>
+    </div>
+
+    <div class="form-group row form-row">
+      <label class="col-lg-3">Czy możliwe samodzielne zapisanie?</label>
+      <label class="col-lg-2">
+        <input type="radio" name="isEnterable" formControlName="isEnterable" [value]="true"/>Tak
+      </label>
+      <label class="col-lg-2">
+        <input type="radio" name="isEnterable" formControlName="isEnterable" [value]="false"/>Nie
+      </label>
+      <div *ngIf="isSubmitted && f.isEnterable.errors" class="invalid-feedback col-lg-7 d-block">
+        <div>Wybierz opcję</div>
+      </div>
+    </div>
+
+    <div class="form-group form-row">
+      <label for="startDate" class="col-lg-3">Data początkowa</label>
+      <input formControlName="startDate" id="startDate" class="col-lg-6"
+             [owlDateTimeTrigger]="dtPicker" [owlDateTime]="dtPicker">
+      <owl-date-time #dtPicker [pickerType]="'both'" [firstDayOfWeek]="1"></owl-date-time>
+
+      <div *ngIf="isSubmitted && f.startDate.errors" class="invalid-feedback col-lg-7 d-block">
+        <div *ngIf="f.startDate.errors.required">Termin startu jest wymagany</div>
+      </div>
+    </div>
+
+    <div class="form-group form-row">
+      <label for="endDate" class="col-lg-3">Data końcowa</label>
+      <input formControlName="endDate" id="endDate" class="col-lg-6"
+             [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
+      <owl-date-time #dtPicker2 [pickerType]="'both'" [firstDayOfWeek]="1"></owl-date-time>
+
+      <div *ngIf="isSubmitted && f.endDate.errors" class="invalid-feedback col-lg-7 d-block">
+        <div *ngIf="f.endDate.errors.required">Termin zakończenia jest wymagany</div>
+      </div>
+    </div>
+
+    <div class="form-group form-row">
+      <label for="place" class="col-lg-3">Ring</label>
+      <ng-multiselect-dropdown
+        id="place"
+        class="col-lg-6"
+        [placeholder]="'Wybór ringu'"
+        [data]="placeDropdownList"
+        [(ngModel)]="placeSelectedItems"
+        [settings]="placeDropdownSettings"
+        [disabled]="isProcessing"
+        [ngModelOptions]="{standalone: true}">
+      </ng-multiselect-dropdown>
+      <div *ngIf="isSubmitted && placeError" class="invalid-feedback col-lg-7 d-block">
+        <div>Wybierz ring</div>
+      </div>
+    </div>
+
+    <div class="form-group form-row-button col-lg-7">
+      <button [disabled]="isProcessing" class="btn btn-primary">Zapisz</button>
+      <img *ngIf="isProcessing"
+           src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+    </div>
+
+
+
+  </form>
+</div>

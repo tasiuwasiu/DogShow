@@ -4,4 +4,5 @@ export interface Participation {
   contestId: number;
   gradeId?: number;
   place?: number;
+  description: string;
 }

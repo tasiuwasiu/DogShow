@@ -23,7 +23,7 @@ export class DeletePlaceButtonComponent implements ViewCell, OnInit {
   }
 
   onClick() {
-    if (confirm('Czy na pewno chcesz usunąć miejsce: ' + this.rowData.name + ' ?')) {
+    if (confirm('Czy na pewno chcesz usunąć ring: ' + this.rowData.name + ' ?')) {
       this.placeService.deletePlace(this.rowData.placeId).subscribe(
         data => {
           this.messageService.addSuccess('Usunięto!');
@@ -35,7 +35,7 @@ export class DeletePlaceButtonComponent implements ViewCell, OnInit {
           } else if (error.status !== null && error.status === 0) {
             this.messageService.addError('Brak połączenia z serwerem API!');
           } else {
-            this.messageService.addError('Błąd usuwania miejsca!');
+            this.messageService.addError('Błąd usuwania ringu!');
           }
         }
       );

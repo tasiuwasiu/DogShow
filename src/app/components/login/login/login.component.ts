@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthorizationService} from '../../../services/Authorization/authorization.service';
 import {first} from 'rxjs/operators';
 import {MessageService} from '../../../services/Message/message.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private titleService: Title,
+              private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
               private authorizationService: AuthorizationService,
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Logowanie');
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]

@@ -46,7 +46,7 @@
 
     <div class="form-group row form-row">
       <label for="repeatPassword" class="col-lg-2">Powtórz hasło</label>
-      <input type="repeatPassword" id="repeatPassword" formControlName="repeatPassword" class="form-control col-lg-6"
+      <input type="password" id="repeatPassword" formControlName="repeatPassword" class="form-control col-lg-6"
              [ngClass]="{ 'is-invalid': isSubmitted && f.repeatPassword.errors }"/>
       <div *ngIf="isSubmitted && f.repeatPassword.errors" class="invalid-feedback col-lg-8">
         <div *ngIf="f.repeatPassword.errors.required">Wprowadź ponownie hasło</div>

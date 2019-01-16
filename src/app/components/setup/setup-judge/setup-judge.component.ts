@@ -5,6 +5,7 @@ import {UserService} from '../../../services/User/user.service';
 import {MessageService} from '../../../services/Message/message.service';
 import {User} from '../../../models/User.model';
 import {first} from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-setup-judge',
@@ -17,13 +18,15 @@ export class SetupJudgeComponent implements OnInit {
   isProcessing = false;
   isSubmitted = false;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private titleService: Title,
+              private formBuilder: FormBuilder,
               private router: Router,
               private userService: UserService,
               private messageService: MessageService) {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Rejestracja sędziego');
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       firstName: ['', Validators.required],
